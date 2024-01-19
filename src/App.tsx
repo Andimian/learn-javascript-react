@@ -1,5 +1,5 @@
-import { Restaurants } from "./src/components/Restaurants";
-import { restaurants } from "./src/mock.ts";
+import { Restaurants } from "./components/Restaurants.tsx";
+import { restaurants } from "./mock.ts";
 
 export const App = () => {
     return (

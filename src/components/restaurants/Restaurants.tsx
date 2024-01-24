@@ -1,7 +1,7 @@
-import Dishoom from "./restaurants/Dishoom.tsx";
-import Homeslice from "./restaurants/Homeslice.tsx";
-import Fabrique from "./restaurants/Fabrique.tsx";
-import FlatIron from "./restaurants/Flat-Iron.tsx";
+import Dishoom from "./Dishoom.tsx";
+import Homeslice from "./Homeslice.tsx";
+import Fabrique from "./Fabrique.tsx";
+import FlatIron from "./Flat-Iron.tsx";
 
 export interface TRestaurantProps {
     id: string,

@@ -1,11 +1,12 @@
-import { Restaurants } from "./components/Restaurants.tsx";
-import { restaurants } from "./moks-data/mock.ts";
+import { Layout } from './components/layout/component.tsx';
+import { Restaurants } from './components/restaurants/Restaurants.tsx';
+import { restaurants } from './moks-data/mock.ts';
 
 export const App = () => {
     return (
-        <div>
-            <Restaurants restaurants={restaurants}/>
-        </div>
+        <Layout>
+            <Restaurants restaurants={restaurants}></Restaurants>
+        </Layout>
     );
 };
 

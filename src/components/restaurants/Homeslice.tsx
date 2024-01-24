@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TRestaurantProps } from "../Restaurants.tsx";
+import { TRestaurantProps } from "./Restaurants.tsx";
 
 
 export const Homeslice: React.FC<TRestaurantProps> = ({name, menu, reviews}) => {

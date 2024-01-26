@@ -1,10 +1,15 @@
-import {MenuProps} from "../../types/types";
-export const Menu = (menu: MenuProps) => {
-	console.log(menu.name);
+import { MenuProps } from "../../types/types.tsx";
+
+export const Menu = (menu: {menu: MenuProps[]}) => {
 	return (
-		<div>
-			{ menu.name}
-		</div>
-	);
+		<>
+			<h3>Меню:</h3>
+			<ul>
+				{menu.menu.map((item) => (
+					<li>{item.name}</li>
+				))}
+			</ul>
+		</>
+	)
 };
 

@@ -1,0 +1,19 @@
+.count {
+  font-size: 26px;
+  color: darkblue;
+  padding: 0 10px;
+}
+.countBtn {
+  border-radius: 20%;
+  border: 2px solid #055cff;
+}
+.dish {
+  display: flex;
+  align-items: center;
+}
+.name {
+  font-size: 30px;
+  font-weight: lighter;
+  min-width: 300px;
+  margin: 5px 20px 5px 0;
+}

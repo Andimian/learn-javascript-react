@@ -1,12 +1,12 @@
-export interface TRestaurantProps {
-    id: string,
-    name: string
-    menu: MenuProps[];
-    reviews: ReviewProps[],
+export interface restaurantProps {
+    id?: string | undefined,
+    name?: string | undefined,
+    menu?: MenuProps[] | undefined,
+    reviews?: ReviewProps[] | undefined,
 }
 
 export interface RestaurantsProps {
-    restaurants: TRestaurantProps[],
+    restaurants: restaurantProps[],
 }
 
 export type MenuProps = {

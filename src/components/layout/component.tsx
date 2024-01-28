@@ -1,7 +1,7 @@
 import { Header } from '../header/component.tsx';
 import React from 'react';
 import { Footer } from '../footer/footer.tsx';
-import classNames from "classnames";
+import classNames from 'classnames';
 import styles from "../layout/style.module.scss";
 
 type Props = {
@@ -10,9 +10,9 @@ type Props = {
 
 export const Layout = ({children}: Props) => {
 	return (
-		<div>
+		<div className={classNames(styles.layout)}>
 			<Header/>
-			<div className={classNames(styles.layout)}>{children}</div>
+			<div >{children}</div>
 			<Footer/>
 		</div>
 	)

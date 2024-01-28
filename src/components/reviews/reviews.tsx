@@ -1,14 +1,12 @@
 import { ReviewProps } from "../../types/types";
+import { Review } from '../review/component.tsx';
 
-export const Reviews = ({reviews}: { reviews: ReviewProps[] }) => {
+export const Reviews = ({reviews}: { reviews: ReviewProps[] | undefined }) => {
     return (
-        <>
-            <h3>Отзывы:</h3>
-            <ul>
-                {reviews.map((review) => (
-                    <li>{review.text}</li>
-                ))}
-            </ul>
-        </>
+        <ul>
+            {reviews && reviews.map((review) => (
+                <li key={review.id}><Review {...review}/></li>
+            ))}
+        </ul>
     );
 };

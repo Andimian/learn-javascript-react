@@ -10,7 +10,8 @@ export const RestaurantPage = () => {
 	const activeRestaurant: restaurantProps | undefined = restaurants.find((rest: restaurantProps) => (rest.id === activeRestaurantId)!);
 	// if (!activeRestaurant) throw new Error('activeRestaurant is undefined');
 
-	return ( <div>
+	return (
+		<div>
 			<RestaurantTabs restaurants={restaurants} onSelect={setActiveRestaurantId}/>
 			{activeRestaurant && <Restaurant {...activeRestaurant} />}
 		</div>

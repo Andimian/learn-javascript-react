@@ -6,13 +6,14 @@ import styles from "../layout/style.module.scss";
 
 type Props = {
 	children: React.ReactNode,
+	className: string,
 }
 
 export const Layout = ({children}: Props) => {
 	return (
 		<div className={classNames(styles.layout)}>
 			<Header/>
-			<div >{children}</div>
+			<div className={classNames(styles.container)}>{children}</div>
 			<Footer/>
 		</div>
 	)

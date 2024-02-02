@@ -1,0 +1,14 @@
+.btn {
+  font-size: 24px;
+}
+.disabled {
+  opacity: 30%;
+}
+.enabled {
+  opacity: 100%;
+}
+
+// можно было сделать так:
+.btn:disabled {
+  opacity: 0;
+}

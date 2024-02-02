@@ -1,13 +1,14 @@
-export interface TRestaurantProps {
+export type restaurantProps  = {
     id: string,
-    name: string
-    menu: MenuProps[];
+    name: string,
+    menu: MenuProps[],
     reviews: ReviewProps[],
-}
+};
 
-export interface RestaurantsProps {
-    restaurants: TRestaurantProps[],
-}
+// export  type RestaurantsProps = {
+//     restaurants: restaurantProps[],
+// }
+export  type RestaurantsProps = restaurantProps[];
 
 export type MenuProps = {
     id: string,

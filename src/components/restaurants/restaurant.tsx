@@ -5,7 +5,10 @@ import { Reviews } from "../reviews/reviews.tsx";
 import styles from "./style.module.scss";
 import classNames from "classnames";
 
-export const Restaurant: React.FC<restaurantProps> = ({name, menu, reviews}) => {
+export const Restaurant: React.FC<restaurantProps> = (
+	{id, name, menu, reviews}
+) => {
+	console.log(id);
 	return (
 		<div>
 			<h2>Ресторан {name}</h2>

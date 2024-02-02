@@ -1,18 +1,14 @@
 import classNames from 'classnames';
 import styles from './style.module.scss';
 
-export const disabled = {
-	enabled: 'enabled',
-	disabled: 'disabled',
-}
-
 type Props = {
 	onClick: () => void,
+	title: string,
 	children?: string,
 	disabled?: boolean,
 	className?: string,
 }
-export const Button = ({onClick, children, className, disabled}: Props) => {
+export const Button = ({onClick, title, className, disabled}: Props) => {
 	return <button
 		className={classNames(styles.btn, className, {
 			[styles.disabled]: disabled === true,
@@ -20,7 +16,7 @@ export const Button = ({onClick, children, className, disabled}: Props) => {
 		})}
 		onClick={onClick}
 	>
-		{children}
+		{title}
 	</button>;
 }
 ;

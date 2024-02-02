@@ -21,9 +21,9 @@ export const Dish = ({name}: MenuProps) => {
 			</h3>
 
 			<div>
-				<Button disabled={count === 0} onClick={decrement} className={classNames(styles.countBtn)}>-</Button>
+				<Button disabled={count === 0} onClick={decrement} className={classNames(styles.countBtn)} title='-'/>
 				<span className={classNames(styles.count)}>{count}</span>
-				<Button disabled={count === 5} onClick={increment} className={classNames(styles.countBtn)}>+</Button>
+				<Button disabled={count === 5} onClick={increment} className={classNames(styles.countBtn)} title='+'/>
 			</div>
 		</div>
 	);

@@ -1,5 +1,6 @@
 import styles from './style.module.scss';
-import { useReducer } from "react";
+import { useContext, useReducer } from "react";
+import { UserAuthContext } from '../../contexts/authContext.tsx';
 
 /* Когда использовать useReducer
 Не существует строгого правила, когда нужно использовать useState, а когда useReducer. Но есть некоторые признаки, по
@@ -67,13 +68,13 @@ export const ReviewForm = () => {
     при каждом обновлении компонента будете вычислять начальное состояние, но никак его не использовать.
     Возвращает само значение и диспатч (нужен для того, чтобы вносить какие-то изменения */
     const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
+    const { user } = useContext(UserAuthContext);
 
     return (
         <div className={styles.root}>
+            {!user ?
             <div className={styles.field}>
                 <label htmlFor="name">Name</label>
-                {/* Как подключить input к состоянию. У поля есть два пропа: value - сюда прокидываешь значение и
-                onChange - сюда прокидываем функцию, которая будет вызываться когда значение будет изменяться */}
                 <input
                     type="text"
                     id="name"
@@ -82,7 +83,8 @@ export const ReviewForm = () => {
                         type: 'setName',
                         payload: event.target.value,
                     })}/>
-            </div>
+            </div> : <div className={styles.reviewerBlock}>Отзыв от пользователя: <span className={styles.reviewer}>{user.name}</span></div>
+            }
             <div className={styles.field}>
                 <label htmlFor="text">Text</label>
                 <input

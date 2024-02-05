@@ -5,10 +5,14 @@ import { Reviews } from "../reviews/reviews.tsx";
 import styles from "./style.module.scss";
 import classNames from "classnames";
 import { ReviewForm } from "../review-form/component.tsx";
+import { useContext } from 'react';
+import { UserAuthContext } from '../../contexts/authContext.tsx';
 
 export const Restaurant: React.FC<restaurantProps> = (
 	{name, menu, reviews}
 ) => {
+	const { user } = useContext(UserAuthContext);
+
 	return (
 		<div>
 			<h2>Ресторан {name}</h2>
@@ -16,7 +20,7 @@ export const Restaurant: React.FC<restaurantProps> = (
 			<Menu menu={menu}/>
 			<h3>Отзывы:</h3>
 			<Reviews reviews={reviews}/>
-			<ReviewForm/>
+			{user && <ReviewForm/>}
 		</div>
 	);
 };

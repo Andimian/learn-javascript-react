@@ -1,15 +1,15 @@
 import { RestaurantPage } from './components/psges/restaurant-page/component.tsx';
 import { Layout } from './components/layout/component.tsx';
 import styles from "./components/review-form/style.module.scss";
-import { initialState, UserAuthContext } from './contexts/authContext.tsx';
+import { User, UserAuthContext } from './contexts/authContext.tsx';
 import { useState } from "react";
 
 
 export const App = () => {
-    const [user, setUser] = useState(initialState);
+    const [user, setUser] = useState<User | null>(null);
 
     return (
-        <UserAuthContext.Provider value={{user: {name: null, email: null}, setUser}}>
+        <UserAuthContext.Provider value={{user, setUser}}>
             <Layout className={styles.root}>
                 <RestaurantPage/>
             </Layout>

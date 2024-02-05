@@ -7,9 +7,8 @@ import classNames from "classnames";
 import { ReviewForm } from "../review-form/component.tsx";
 
 export const Restaurant: React.FC<restaurantProps> = (
-	{id, name, menu, reviews}
+	{name, menu, reviews}
 ) => {
-	console.log(id);
 	return (
 		<div>
 			<h2>Ресторан {name}</h2>

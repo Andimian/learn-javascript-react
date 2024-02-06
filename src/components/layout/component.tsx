@@ -12,10 +12,13 @@ type Props = {
 
 export const Layout = ({children}: Props) => {
 	return (
-		<div className={classNames(styles.layout)}>
-			<Header/>
-			<div className={classNames(styles.container)}>{children}</div>
-			<Footer/>
+		<div>
+			<div className={classNames(styles.layout)}>
+				<Header/>
+				<div className={classNames(styles.container)}>{children}</div>
+				<Footer/>
+			</div>
+			<div id="modal-container"></div>
 		</div>
 	)
 }

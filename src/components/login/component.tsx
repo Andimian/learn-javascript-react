@@ -1,26 +1,33 @@
 import classNames from 'classnames';
 import styles from './style.module.scss';
 import { Button } from '../button/component.tsx';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserAuthContext } from '../../contexts/authContext.tsx';
+import { Modal } from "../modal/component.tsx";
+import { AuthForm } from "../auth-form/comopnent.tsx";
 
-const fakeUser = {
-	name: 'andi',
-	email: 'test@mail.ru',
-}
 export const Login = () => {
 	const { user, setUser } = useContext(UserAuthContext);
+	// для модалки
+	const [ isOpen, setIsOpen ] = useState(false);
+
+	const closeModal = () => setIsOpen(false);
 
 	return (
 		// Если пользователь авторизован, то в шапке показываем его имя и кнопку выйти.
 		<div className={classNames(styles.root)}>
-			{!user && <Button onClick={() => setUser(fakeUser)} title='Войти'/>}
-			{user &&
-                <div>
-					<span className={classNames(styles.name)}>{user.name}</span>
-                    <Button onClick={() => setUser(null)} title='Выйти'/>
-				</div>
-			}
+			{isOpen && (
+				<Modal onClose={closeModal}>
+					<AuthForm onLogin={closeModal}/>
+				</Modal>
+			)}
+
+			{user ? (
+				<>
+					<span>user</span>
+					<Button onClick={() => setUser(null)} title='Выйти'/>
+				</>
+			) : <Button onClick={() => setIsOpen(true)} title='Войти'/>}
 		</div>
 	);
 };

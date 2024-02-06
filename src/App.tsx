@@ -1,4 +1,4 @@
-import { RestaurantPage } from './components/psges/restaurant-page/component.tsx';
+import { RestaurantPage } from './components/pages/restaurant-page/component.tsx';
 import { Layout } from './components/layout/component.tsx';
 import styles from "./components/review-form/style.module.scss";
 import { User, UserAuthContext } from './contexts/authContext.tsx';

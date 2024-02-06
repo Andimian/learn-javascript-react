@@ -18,16 +18,20 @@ export const Login = () => {
 		<div className={classNames(styles.root)}>
 			{isOpen && (
 				<Modal onClose={closeModal}>
-					<AuthForm onLogin={closeModal}/>
+					<AuthForm closeModal={closeModal} className={classNames(styles.fieldModal)}/>
 				</Modal>
 			)}
 
 			{user ? (
 				<>
 					<span className={styles.name}>{user.name}</span>
-					<Button onClick={() => setUser(null)} title='Выйти'/>
+					<Button className={styles.btn} onClick={() => setUser(null)} title='Выйти'/>
 				</>
-			) : <Button onClick={() => setIsOpen(true)} title='Войти'/>}
+			) : <Button
+				className={styles.btn}
+				onClick={() => setIsOpen(true)}
+				title='Войти'
+			/>}
 		</div>
 	);
 };

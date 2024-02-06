@@ -8,18 +8,21 @@ type Props = {
     onClose: () => void,
 }
 
-export const Modal = ({children}:Props ) => {
+export const Modal = ({children, onClose}:Props ) => {
     const modalContainer = useRef<HTMLElement>(document.getElementById('modal-container'));
     return (
         <>
-        {modalContainer.current && (
+            {modalContainer.current && (
             createPortal(
-                <div className={classNames(styles.root)}>
+                <>
+                    <button onClick={onClose} className={styles.overlay}/>
+                    <div className={classNames(styles.root)}>
                     {children}
-                </div>,
+                </div>
+                </>,
                 modalContainer.current
             )
-        )}
+            )}
         </>
     )
 };

@@ -1,32 +1,93 @@
 import { Button } from "../button/component.tsx";
-import { useContext, useState } from "react";
+import { useContext, useReducer } from "react";
 import { UserAuthContext } from "../../contexts/authContext.tsx";
+import styles from './style.module.scss';
 
-export const AuthForm = ({onLogin} : { onLogin: () => void }) => {
-    const [userName, setUserName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
+type Prop = {
+    closeModal: () => void,
+    className: string,
+}
+type State = {
+    name: string;
+    email: string;
+};
+
+type Action = {
+    type: string;
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    payload: any;
+};
+
+const INITIAL_STATE = {
+    name: '',
+    email: '',
+}
+
+const reducer = (state: State, { type, payload }: Action): State => {
+    switch (type) {
+        case 'setName':
+            return {
+                ...state,
+                name: payload,
+            };
+        case 'setEmail':
+            return {
+                ...state,
+                email: payload,
+            };
+        case 'cancel':
+            return {
+                ...payload,
+            };
+
+        default:
+            return state;
+    }
+}
+
+export const AuthForm = ({closeModal, className}: Prop ) => {
     const {setUser} = useContext(UserAuthContext);
+    const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
+
     return (
-        <div>
-            <input
-                type="text"
-                value={userName}
-                onChange={(event) => {
-                    setUserName(event.target.value);
-                    console.log(userName);
-                }}
+        <div className={styles.authModal}>
+            <div className={className}>
+                <label htmlFor="name">Имя</label>
+                <input
+                    type="text"
+                    id="name"
+                    value={form.name}
+                    onChange={(event) => dispatch({
+                        type: 'setName',
+                        payload: event.target.value,
+                    })}/>
+            </div>
+            <div className={className}>
+                <label htmlFor="email">Email</label>
+                <input
+                    type="text"
+                    id="email"
+                    value={form.email}
+                    onChange={(event) => dispatch({
+                        type: 'setEmail',
+                        payload: event.target.value,
+                    })}/>
+            </div>
+            <Button title={"Войти"}
+                    onClick={() => {
+                        if (form.name.length > 0) {
+                        setUser({name: form.name, email: form.email});
+                        closeModal();
+                        }
+                    }}
+                    disabled={form.name.length === 0}
             />
-            <input
-                type="text"
-                value={userEmail}
-                onChange={(event) => setUserEmail(event.target.value)}
-            />
-            <Button title={"Войти"} onClick={() => {
-                setUser({name: userName, email: userEmail});
-                onLogin();
-            }}/>
             <Button title={"Отмена"} onClick={() => {
-                setUser(null);
+                dispatch({
+                    type: 'cancel',
+                    payload: INITIAL_STATE,
+                });
+                closeModal();
             }}/>
         </div>
     );

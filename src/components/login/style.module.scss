@@ -1,16 +1,28 @@
 .root {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  padding-right: 30px;
 }
 .name {
   font-size: 34px;
   color: #eea316;
   padding: 0 8px;
 }
+.btn {
+  width: 100px;
+}
 .modal {
   position: absolute;
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
+}
+.fieldModal {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.authForm {
+  display: flex;
 }

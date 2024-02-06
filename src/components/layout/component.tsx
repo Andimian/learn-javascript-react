@@ -7,12 +7,11 @@ import styles from "../layout/style.module.scss";
 type Props = {
 	// children: React.ReactNode,
 	children: ReactNode,
-	className: string,
 }
 
 export const Layout = ({children}: Props) => {
 	return (
-		<div>
+		<div className={styles.parent}>
 			<div className={classNames(styles.layout)}>
 				<Header/>
 				<div className={classNames(styles.container)}>{children}</div>

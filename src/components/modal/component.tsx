@@ -9,13 +9,17 @@ type Props = {
 }
 
 export const Modal = ({children}:Props ) => {
-    const modalContainer = useRef(document.getElementById('modal-container'));
+    const modalContainer = useRef<HTMLElement>(document.getElementById('modal-container'));
     return (
-        createPortal(
-        <div className={classNames(styles.root)}>
-            {children}
-        </div>,
-        modalContainer.current
-        )
+        <>
+        {modalContainer.current && (
+            createPortal(
+                <div className={classNames(styles.root)}>
+                    {children}
+                </div>,
+                modalContainer.current
+            )
+        )}
+        </>
     )
 };

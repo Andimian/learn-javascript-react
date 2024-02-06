@@ -11,18 +11,22 @@ export const AuthForm = ({onLogin} : { onLogin: () => void }) => {
             <input
                 type="text"
                 value={userName}
-                onChange={(event) => setUserName(event.target.value)}
+                onChange={(event) => {
+                    setUserName(event.target.value);
+                    console.log(userName);
+                }}
             />
-            <input type="text"/>
             <input
                 type="text"
                 value={userEmail}
                 onChange={(event) => setUserEmail(event.target.value)}
             />
-            <input type="text"/>
             <Button title={"Войти"} onClick={() => {
                 setUser({name: userName, email: userEmail});
                 onLogin();
+            }}/>
+            <Button title={"Отмена"} onClick={() => {
+                setUser(null);
             }}/>
         </div>
     );

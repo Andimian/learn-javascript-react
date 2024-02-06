@@ -24,7 +24,7 @@ export const Login = () => {
 
 			{user ? (
 				<>
-					<span>user</span>
+					<span className={styles.name}>{user.name}</span>
 					<Button onClick={() => setUser(null)} title='Выйти'/>
 				</>
 			) : <Button onClick={() => setIsOpen(true)} title='Войти'/>}

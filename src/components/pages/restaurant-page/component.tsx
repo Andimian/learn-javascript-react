@@ -1,19 +1,18 @@
 import { RestaurantTabs } from '../../restaurants-tabs/component.tsx';
-import { restaurants } from '../../../moks-data/mock.ts';
 import { useState } from 'react';
 import { Restaurant } from '../../restaurants/restaurant.tsx';
-import { restaurantProps } from '../../../types/types.tsx';
+import { useSelector } from 'react-redux';
+import { selectorRestaurantIds } from '../../../redux/entities/restaurant/selectors.tsx';
 
 export const RestaurantPage = () => {
-	const [activeRestaurantId, setActiveRestaurantId] = useState<string>(restaurants[0].id);
-
-	const activeRestaurant: restaurantProps | undefined = restaurants.find((rest: restaurantProps) => (rest.id === activeRestaurantId)!);
-	// if (!activeRestaurant) throw new Error('activeRestaurant is undefined');
+	const restaurantsIds = useSelector(selectorRestaurantIds);
+	const [activeRestaurantId, setActiveRestaurantId] = useState<string>(restaurantsIds[0]);
+	const activeId: string | undefined = restaurantsIds.find((id: string) => (id === activeRestaurantId)!);
 
 	return (
 		<div>
-			<RestaurantTabs restaurants={restaurants} onSelect={setActiveRestaurantId}/>
-			{activeRestaurant && <Restaurant {...activeRestaurant} />}
+			<RestaurantTabs onSelect={setActiveRestaurantId}/>
+			{activeId && <Restaurant id={activeId} />}
 		</div>
 	);
 };

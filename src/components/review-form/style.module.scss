@@ -1,11 +1,15 @@
-.root {
-
-}
-
 .field {
   display: flex;
   flex-direction: column;
   &:not(:last-child) {
   margin-bottom: 5px;
   }
+}
+.reviewerBlock {
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.reviewer {
+  font-size: 30px;
+
 }

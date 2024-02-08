@@ -1,23 +1,30 @@
-import * as React from 'react';
-import { restaurantProps } from '../../types/types.tsx';
 import { Menu } from '../menu/component.tsx';
-import { Reviews } from "../reviews/reviews.tsx";
 import styles from "./style.module.scss";
 import classNames from "classnames";
 import { ReviewForm } from "../review-form/component.tsx";
+import { useContext } from 'react';
+import { UserAuthContext } from '../../contexts/authContext.tsx';
+import { useSelector } from 'react-redux';
+import { selectorRestaurantById } from '../../redux/entities/restaurant/selectors.tsx';
+import { RootState } from '../../redux';
+import { Reviews } from '../reviews/reviews.tsx';
 
-export const Restaurant: React.FC<restaurantProps> = (
-	{id, name, menu, reviews}
-) => {
-	console.log(id);
+export type restaurantProps  = {
+	id: string,
+};
+
+export const Restaurant = ({id}: restaurantProps) => {
+	const { user } = useContext(UserAuthContext);
+	const rest = useSelector((state: RootState) => selectorRestaurantById(state, id))
+
 	return (
 		<div>
-			<h2>Ресторан {name}</h2>
+			<h2>Ресторан {rest.name}</h2>
 			<h3 className={classNames(styles.menuTitle)}>Меню:</h3>
-			<Menu menu={menu}/>
+			<Menu menu={rest.menu}/>
 			<h3>Отзывы:</h3>
-			<Reviews reviews={reviews}/>
-			<ReviewForm/>
+			<Reviews reviews={rest.reviews}/>
+			{user && <ReviewForm/>}
 		</div>
 	);
 };

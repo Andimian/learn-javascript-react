@@ -1,16 +1,17 @@
-import { RestaurantsProps } from '../../types/types.tsx';
 import { Tab } from '../tab/component.tsx';
+import { useSelector } from 'react-redux';
+import { selectorRestaurantIds } from '../../redux/entities/restaurant/selectors.tsx';
 
 type Props = {
-	restaurants: RestaurantsProps,
 	onSelect: (id: string) => void,
 }
 
-export const RestaurantTabs = ({restaurants, onSelect}: Props) => {
+export const RestaurantTabs = ({ onSelect }: Props) => {
+	const restaurantsIds = useSelector(selectorRestaurantIds);
 	return (
 		<div>
-			{restaurants.map(({name, id}) => (
-				<Tab onClick={ () => onSelect(id)} key={id} title={name || 'название не передано'}></Tab>
+			{restaurantsIds.map((id) => (
+				<Tab onClick={ () => onSelect(id)} key={id} id={id}></Tab>
 			))}
 		</div>
 	);

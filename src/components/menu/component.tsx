@@ -1,11 +1,14 @@
-import { MenuProps } from "../../types/types.tsx";
 import { Dish } from '../dish/component.tsx';
 
-export const Menu = (menu: {menu: MenuProps[] | undefined} ) => {
+export type MenuProps = {
+	menu: string[],
+};
+
+export const Menu = ({menu}: MenuProps ) => {
 	return (
 		<ul>
-			{menu.menu && menu.menu.map((dish	) => (
-				<li key={dish.id}><Dish {...dish}/></li>
+			{menu.map((dishId	) => (
+				<li key={dishId}><Dish dishId={dishId} /></li>
 			))}
 		</ul>
 	)

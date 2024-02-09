@@ -8,6 +8,7 @@ type Props = {
 
 export const RestaurantTabs = ({ onSelect }: Props) => {
 	const restaurantsIds = useSelector(selectorRestaurantIds);
+
 	return (
 		<div>
 			{restaurantsIds.map((id) => (

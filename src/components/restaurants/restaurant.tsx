@@ -15,7 +15,7 @@ export type restaurantProps  = {
 
 export const Restaurant = ({id}: restaurantProps) => {
 	const { user } = useContext(UserAuthContext);
-	const rest = useSelector((state: RootState) => selectorRestaurantById(state, id))
+	const rest = useSelector((state: RootState) => selectorRestaurantById(state, id));
 
 	return (
 		<div>

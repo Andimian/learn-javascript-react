@@ -2,7 +2,7 @@ import { Menu } from '../menu/component.tsx';
 import styles from "./style.module.scss";
 import classNames from "classnames";
 import { ReviewForm } from "../review-form/component.tsx";
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import { UserAuthContext } from '../../contexts/authContext.tsx';
 import { useSelector } from 'react-redux';
 import { selectorRestaurantById } from '../../redux/entities/restaurant/selectors.tsx';
@@ -13,7 +13,7 @@ export type restaurantProps  = {
 	id: string,
 };
 
-export const Restaurant = ({id}: restaurantProps) => {
+export const Restaurant: FC<restaurantProps> = ({id}) => {
 	const { user } = useContext(UserAuthContext);
 	const rest = useSelector((state: RootState) => selectorRestaurantById(state, id));
 

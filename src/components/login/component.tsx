@@ -10,7 +10,6 @@ export const Login = () => {
 	const { user, setUser } = useContext(UserAuthContext);
 	// для модалки
 	const [ isOpen, setIsOpen ] = useState(false);
-
 	const closeModal = () => setIsOpen(false);
 
 	return (

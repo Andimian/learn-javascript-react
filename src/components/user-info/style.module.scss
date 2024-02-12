@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.btn {
+  height: 80px;
+  width: 80px;
+  background-color: transparent;
+  border: none;
+  border-radius: 40px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.modal {
+  width: 600px;
+  height: 600px;
+}

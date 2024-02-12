@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getDish, } from './thunks/get-dish.tsx';
+import { fetchDish, } from './thunks/fetch-dish.tsx';
 import { DishType } from '../../../components/dish/component.tsx';
 
 // Без типизации не обратиться к полю при получении
@@ -13,7 +13,7 @@ export const dishSlice = createSlice({
 	 что нам надо обрабатывать экшены, которые не здесь были созданы, а были созданы санкой */
 	extraReducers: (builder) =>
 		builder
-			.addCase(getDish.fulfilled, (state, {payload}) => {
+			.addCase(fetchDish.fulfilled, (state, {payload}) => {
 				entityAdapter.setAll(state, payload);
 			}),
 			// .addCase(getDish.rejected, () => {}),

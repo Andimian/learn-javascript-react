@@ -10,7 +10,7 @@ type NormalizedRestaurant = {
 type RestaurantEntities = {
 	[id: string]: NormalizedRestaurant;
 }
-export const restaurantSlice = createSlice({
+export const restaurantsSlice = createSlice({
 	name: 'restaurant',
 	initialState: {
 		entities: normalizedRestaurants.reduce((accum: RestaurantEntities, restaurant) => {

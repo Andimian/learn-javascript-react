@@ -4,5 +4,6 @@ import { Cart }                 from "./component.js";
 
 export const CartContainer = () => {
   const productIds = useSelector(selectCartProductIds);
+  // const productIds = useSelector((state: RootState) => selectCartProductIds(state));
   return <Cart productIds={productIds} />;
 };

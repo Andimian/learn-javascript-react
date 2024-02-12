@@ -9,7 +9,6 @@ export const cartSlice = createSlice({
 		},
 		decrement: (state, { payload: productId }) => {
 			state[productId] = (state[productId] || 0) - 1;
-			console.log('fasdf');
 			if (state[productId] <= 0) {
 				delete state[productId];
 			}

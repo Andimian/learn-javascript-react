@@ -1,12 +1,9 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { getDish, } from './thunks/get-dish.tsx';
+import { DishType } from '../../../components/dish/component.tsx';
 
-// type DishState = {
-//
-// }
-
-// todo че делает?
-const entityAdapter = createEntityAdapter();
+// Без типизации не обратиться к полю при получении
+const entityAdapter = createEntityAdapter<DishType>();
 
 export const dishSlice = createSlice({
 	name: 'dish',

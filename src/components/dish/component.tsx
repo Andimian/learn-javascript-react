@@ -7,6 +7,7 @@ import { selectorDishById } from '../../redux/entities/dish/selectors.tsx';
 import { increment, selectProductAmountById } from '../../redux/ui/cart';
 import { AppDispatch, RootState } from '../../redux';
 import { Button } from '../button/component.tsx';
+import { Counter } from '../counter/component.tsx';
 
 type Props = {
 	dishId: string,
@@ -19,14 +20,9 @@ export type DishType = {
 	ingredients: string[];
 }
 export const Dish: FC<Props> = ({dishId}) => {
-	const dispatch = useDispatch<AppDispatch>();
-	useEffect(() => {
-		dispatch(getDish())
-	}, []);
+
 	const dish: DishType = useSelector((state: RootState) => selectorDishById(state, dishId));
 	// const dish = useSelector((state: RootState) => selectorDishById(state, dishId));
-
-	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId))
 	// const dish = useSelector((state: RootState) => selectorDishById(state, dishId))
 	// const dispatch = useDispatch();
 
@@ -35,11 +31,7 @@ export const Dish: FC<Props> = ({dishId}) => {
 			<h3 className={classNames(styles.name)}>
 				{dish && dish.name}
 			</h3>
-			<div>
-				<Button disabled={amount === 0} onClick={() => dispatch(increment)} className={classNames(styles.countBtn)} title='-'/>
-				<span className={classNames(styles.count)}>{amount}</span>
-				<Button disabled={amount === 5} onClick={() => dispatch(increment)} className={classNames(styles.countBtn)} title='+'/>
-			</div>
+			<Counter id={dishId}/>
 		</div>
 	);
 };

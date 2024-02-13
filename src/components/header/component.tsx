@@ -1,16 +1,14 @@
 import styles from "./style.module.scss";
 import classNames from "classnames";
-import { Login } from '../login/component.tsx';
-import { CartContainer } from '../cart/container.tsx';
+import Logo from '../logo/logo.tsx';
+import UserInfo from '../user-info/userInfo.tsx';
 
 export const Header = () => {
 	return (
 		<header className={classNames(styles.header) }>
+			<Logo/>
 			<h1>Наши рестораны</h1>
-			<>
-				<Login/>
-				<CartContainer/>
-			</>
+			<UserInfo/>
 		</header>
 	)
 }

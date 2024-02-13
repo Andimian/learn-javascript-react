@@ -2,9 +2,9 @@ import styles from "./style.module.scss";
 import classNames from "classnames";
 import { useDispatch, useSelector } from 'react-redux';
 import { FC, useEffect } from 'react';
-import { getDish, } from '../../redux/entities/dish/thunks/get-dish.tsx';
+import { fetchDish, } from '../../redux/entities/dish/thunks/fetch-dish.tsx';
 import { selectorDishById } from '../../redux/entities/dish/selectors.tsx';
-import { increment, selectProductAmountById } from '../../redux/ui/cart';
+import { decrement, increment, selectProductAmountById } from '../../redux/ui/cart';
 import { AppDispatch, RootState } from '../../redux';
 import { Button } from '../button/component.tsx';
 import { Counter } from '../counter/component.tsx';
@@ -20,9 +20,14 @@ export type DishType = {
 	ingredients: string[];
 }
 export const Dish: FC<Props> = ({dishId}) => {
-
+	const dispatch = useDispatch<AppDispatch>();
+	useEffect(() => {
+		dispatch(getDish())
+	}, []);
 	const dish: DishType = useSelector((state: RootState) => selectorDishById(state, dishId));
 	// const dish = useSelector((state: RootState) => selectorDishById(state, dishId));
+
+	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId))
 	// const dish = useSelector((state: RootState) => selectorDishById(state, dishId))
 	// const dispatch = useDispatch();
 

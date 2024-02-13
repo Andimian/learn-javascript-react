@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const INITIAL_STATE = {
+// 	'': number
+// }
 export const cartSlice = createSlice({
 	name: "cart",
 	initialState: {},
 	reducers: {
 		increment: (state, { payload: productId }) => {
 			state[productId] = (state[productId] || 0) + 1;
+			console.log('asdf');
 		},
 		decrement: (state, { payload: productId }) => {
 			state[productId] = (state[productId] || 0) - 1;

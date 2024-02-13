@@ -1,6 +1,6 @@
 import { Dish } from '../dish/component.tsx';
 import { FC } from 'react';
-import styles from './'
+import styles from './style.module.scss';
 
 type props = {
   productIds: string[],

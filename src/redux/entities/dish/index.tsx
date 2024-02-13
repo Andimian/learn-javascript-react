@@ -19,12 +19,3 @@ export const dishSlice = createSlice({
 			// .addCase(getDish.rejected, () => {}),
 	reducers: {},
 });
-
-// export const dishesSlice = createSlice({
-// 	name: "dish",
-// 	initialState: entityAdapter.getInitialState(),
-// 	extraReducers: (builder) =>
-// 		builder.addCase(getDishes.fulfilled, (state, { payload }) => {
-// 			entityAdapter.setAll(state, payload);
-// 		}),
-// });

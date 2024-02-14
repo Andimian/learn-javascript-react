@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectorRestaurantIds } from '../selectors.tsx';
 import { TRestaurant } from '../index.tsx';
 import { RootState } from '../../../index.tsx';
 
@@ -11,6 +10,6 @@ export const getRestaurants = createAsyncThunk<TRestaurant[], string, { state: R
     return result;
   },
   {
-    condition: (_, { getState }) => !selectorRestaurantIds(getState())?.length,
+    // condition: (_, { getState }) => !selectorRestaurantIds(getState())?.length,
   }
 );

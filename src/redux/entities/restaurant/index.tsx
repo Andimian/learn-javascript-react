@@ -8,7 +8,7 @@ export type TRestaurant = {
 	reviews: string[];
 }
 
-const entityAdapter = createEntityAdapter<TRestaurant, string>();
+const entityAdapter = createEntityAdapter<TRestaurant>();
 
 export const restaurantsSlice = createSlice({
 	name: 'restaurant',

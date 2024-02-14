@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { fetchDish } from '../dish/thunks/fetch-dish.tsx';
+import { getReviews, TReview } from './thunks/get-reviews.ts';
 
-const entityAdapter = createEntityAdapter();
+const entityAdapter = createEntityAdapter<TReview>();
 
 export const reviewSlice = createSlice({
 	name: 'review',
@@ -10,7 +10,7 @@ export const reviewSlice = createSlice({
 	extraReducers: (builder) => {
 		// builder.addMatcher()) // можно проверить соответствует ли action по названию (типу) данному matcher-у
 		builder
-			.addCase(fetchDish.fulfilled, (state, { payload }) => {
+			.addCase(getReviews.fulfilled, (state, { payload }) => {
 				// .addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
 				entityAdapter.setAll(state, payload);
 			});

@@ -3,7 +3,7 @@ import { selectorReviewIds } from '../selectors.tsx';
 import { RootState } from '../../../index.tsx';
 
 
-type TReview = {
+export type TReview = {
     id: string;
     userId: string;
     text: string;
@@ -11,9 +11,11 @@ type TReview = {
 }
 
 export const getReviews = createAsyncThunk<TReview[], string, { state: RootState }>(
-  "restaurant/getUsers",
-  async () => {
-    const response = await fetch("http://localhost:3001/api/restaurants");
+  "review/getReviews",
+  async (restaurantId) => {
+    const response = await fetch(
+        `http://localhost:3001/api/reviews?restaurantId=${restaurantId}`
+    );
     const result = await response.json();
     return result;
   },

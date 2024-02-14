@@ -6,7 +6,6 @@ type props = {
   productIds: string[],
 }
 export const Cart: FC<props> = ({ productIds }) => {
-
   return (
     <div className={styles.root}>
         {productIds.length

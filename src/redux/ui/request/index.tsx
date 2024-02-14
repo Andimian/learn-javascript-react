@@ -1,32 +1,42 @@
-import { createSlice }    from "@reduxjs/toolkit";
+import { Action, createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATUS } from "./constants.js";
 
+// typescript fix - Property 'meta' does not exist on type 'Action'
+interface ActionWithMeta extends Action {
+    meta: {
+        requestId: string;
+    };
+}
+
+const initialState: Record<string, string> = {};
 export const requestSlice = createSlice({
   name: "request",
-  initialState: {},
+  initialState,
   selectors: {
     selectIsLoading: (state, id) => state[id] === REQUEST_STATUS.pending,
+    selectIsFulfilled: (state, id: string) => state[id] === REQUEST_STATUS.success,
   },
   extraReducers: (builder) =>
     builder
       .addMatcher(
         ({ type }) => type.endsWith("/pending"),
-        (state, { meta }) => {
-          state[meta.requestId] = REQUEST_STATUS.pending;
+        (state, action) => {
+          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.pending;
         }
       )
       .addMatcher(
         ({ type }) => type.endsWith("/fulfilled"),
-        (state, { meta }) => {
-          state[meta.requestId] = REQUEST_STATUS.success;
+        (state, action) => {
+          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.success;
         }
       )
       .addMatcher(
         ({ type }) => type.endsWith("/rejected"),
-        (state, { meta }) => {
-          state[meta.requestId] = REQUEST_STATUS.fail;
+        (state, action) => {
+          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.fail;
         }
       ),
+    reducers: {},
 });
 
 export const { selectIsLoading } = requestSlice.selectors;

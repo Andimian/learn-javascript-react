@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { DishType } from '../../../../components/dish/component.tsx';
 import { RootState } from '../../../index.tsx';
+import { selectorDishIds } from '../selectors.tsx';
 
 export const fetchDish = createAsyncThunk<DishType[], string, { state: RootState }>(
 	'dish/fetchDish',
@@ -9,5 +10,5 @@ export const fetchDish = createAsyncThunk<DishType[], string, { state: RootState
 		const result = await response.json();
 		return result;
 	},
-	// {condition: (_, {getState}) => !selectorDishIds(getState(), ).length}
+	{condition: (_, {getState}) => !selectorDishIds(getState(), ).length}
 );

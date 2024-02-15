@@ -1,12 +1,13 @@
-import { useSelector } from 'react-redux';
-import { selectorReviewById } from '../../redux/entities/review/selectors.tsx';
-import { RootState } from '../../redux';
+import { TReview } from '../../redux/entities/review/thunks/get-reviews.ts';
 
-export const Review = ({reviewId}: {reviewId: string}) => {
-	const review = useSelector((state: RootState) => selectorReviewById(state, reviewId))
+export const Review = ({text, rating}: TReview) => {
+	console.log('f');
 	return (
 		<div>
-			{review.text}
+			<div>
+				<b>★{rating}</b>
+			</div>
+			<p>{text}</p>
 		</div>
-	);
+	)
 };

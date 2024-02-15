@@ -7,8 +7,9 @@ import { UserAuthContext } from '../../contexts/authContext.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorRestaurantById } from '../../redux/entities/restaurant/selectors.tsx';
 import { RootState } from '../../redux';
-import { Reviews } from '../reviews/reviews.tsx';
 import { getReviews } from '../../redux/entities/review/thunks/get-reviews.ts';
+import { fetchDish } from '../../redux/entities/dish/thunks/fetch-dish.tsx';
+import { ReviewsContainer } from '../reviews/reviews-container.tsx';
 
 export type restaurantProps  = {
 	id: string,
@@ -16,11 +17,12 @@ export type restaurantProps  = {
 
 export const Restaurant: FC<restaurantProps> = ({id}) => {
 	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchDish())
+		dispatch(getReviews())
+	}, []);
 	const { user } = useContext(UserAuthContext);
 	const rest = useSelector((state: RootState) => selectorRestaurantById(state, id));
-	useEffect(() => {
-		dispatch(getReviews(id))
-	}, []);
 
 	return (
 		<div>
@@ -28,7 +30,7 @@ export const Restaurant: FC<restaurantProps> = ({id}) => {
 			<h3 className={classNames(styles.menuTitle)}>Меню:</h3>
 			<Menu menu={rest.menu}/>
 			<h3>Отзывы:</h3>
-			<Reviews reviews={rest.reviews}/>
+			<ReviewsContainer restaurantId={id}/>
 			{user && <ReviewForm/>}
 		</div>
 	);

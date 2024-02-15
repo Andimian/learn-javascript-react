@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { selectorReviewIds } from '../selectors.tsx';
 import { RootState } from '../../../index.tsx';
 
 
@@ -12,7 +11,7 @@ export type TReview = {
 
 export const getReviews = createAsyncThunk<TReview[], string, { state: RootState }>(
   "review/getReviews",
-  async (restaurantId) => {
+  async (restaurantId: string) => {
     const response = await fetch(
         `http://localhost:3001/api/reviews?restaurantId=${restaurantId}`
     );
@@ -20,6 +19,15 @@ export const getReviews = createAsyncThunk<TReview[], string, { state: RootState
     return result;
   },
   {
-    condition: (_, { getState }) => !selectorReviewIds(getState())?.length,
+      // condition: (restaurantId, { getState }) => {
+      //     const restaurantReviewsIds: string[] = selectRestaurantReviewsById(
+      //         getState(),
+      //         restaurantId
+      //     );
+      //     const reviewsIds = selectReviewsIds(getState());
+      //     return !restaurantReviewsIds.every((id) => reviewsIds.includes(id));
+      // },
+
+    // condition: (_, { getState }) => !selectorReviewIds(getState())?.length,
   }
 );

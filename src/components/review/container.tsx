@@ -6,6 +6,6 @@ import { Review } from './component.tsx';
 export const ReviewContainer = ({reviewId}: {reviewId: string}) => {
 	const review = useSelector((state: RootState) => selectorReviewById(state, reviewId));
 	return (
-		<Review review={review}/>
+		<Review {...review}/>
 	);
 };

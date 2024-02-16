@@ -1,7 +1,6 @@
 import { TReview } from '../../redux/entities/review/thunks/get-reviews.ts';
 
-export const Review = ({text, rating}: TReview) => {
-	console.log('f');
+export const Review = ({rating, text}: TReview) => {
 	return (
 		<div>
 			<div>

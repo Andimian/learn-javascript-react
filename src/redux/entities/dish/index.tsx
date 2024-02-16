@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { DishType } from '../../../components/dish/component.tsx';
-import { fetchDish } from './thunks/fetch-dish.tsx';
+import { getDishesByRestaurantId } from './thunks/get-dishes-by-restaurant-id.tsx';
 
 /* Функция, которая генерирует набор готовых редукторов и селекторов для выполнения операций CRUD над нормализованной
 структурой состояния, содержащей экземпляры объекта данных определенного типа. Эти функции редуктора могут передаваться
@@ -19,7 +19,7 @@ export const dishSlice = createSlice({
 	extraReducers: (builder) => {
 		// builder.addMatcher()) // можно проверить соответствует ли action по названию (типу) данному matcher-у
 		builder
-			.addCase(fetchDish.fulfilled, (state, { payload }) => {
+			.addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
 			// .addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
 				entityAdapter.setAll(state, payload);
 		});

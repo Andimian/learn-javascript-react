@@ -11,9 +11,11 @@ export type TReview = {
 
 export const getReviews = createAsyncThunk<TReview[], string, { state: RootState }>(
   "review/getReviews",
-  async (restaurantId: string) => {
+  // async (restaurantId: string) => {
+  async () => {
     const response = await fetch(
-        `http://localhost:3001/api/reviews?restaurantId=${restaurantId}`
+        // `http://localhost:3001/api/reviews?restaurantId=${restaurantId}`
+        `http://localhost:3001/api/reviews`
     );
     const result = await response.json();
     return result;

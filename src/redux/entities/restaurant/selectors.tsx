@@ -8,3 +8,6 @@ export const selectorRestaurantById = (state: RootState, id: string) => selector
 
 export const selectRestaurantMenuById = (state: RootState, id: string) =>
 	selectorRestaurantById(state, id).menu;
+
+export const selectRestaurantReviewsById = (state: RootState, id: string) =>
+	selectorRestaurantById(state, id).reviews;

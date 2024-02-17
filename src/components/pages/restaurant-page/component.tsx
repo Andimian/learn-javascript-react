@@ -1,28 +1,35 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectorRestaurantIds } from '../../../redux/entities/restaurant/selectors.tsx';
+import { selectIsLoading } from '../../../redux/ui/request';
 import { getRestaurants } from '../../../redux/entities/restaurant/thunks/get-restaurants.ts';
-import { RestaurantTabs } from '../../restaurant-tabs/component.tsx';
+import { RestaurantTabsContainer } from '../../restaurant-tabs/container.tsx';
+import { selectorRestaurantIds } from '../../../redux/entities/restaurant/selectors.tsx';
 import { RestaurantContainer } from '../../restaurant/container.tsx';
+import { AppDispatch, RootState } from '../../../redux';
 
 export const RestaurantPage = () => {
-	const dispatch = useDispatch();
+	const [activeRestaurantId, setActiveRestaurantId] = useState<string | null>(null);
+
+	// Этот прикол для отображения загрузки
+	const [requestId, setRequestId] = useState<string | null>(null);
+	const isLoading = useSelector((state: RootState) => selectIsLoading(state, requestId));
+
+	const dispatch = useDispatch<AppDispatch>();
 	useEffect(() => {
-		dispatch(getRestaurants())
+		setRequestId(dispatch(getRestaurants()).requestId);
 	}, []);
-	const restaurantsIds = useSelector(selectorRestaurantIds);
-	const [activeRestaurantId, setActiveRestaurantId] = useState<string>(restaurantsIds[0]);
-	const activeId: string | undefined = restaurantsIds.find((id: string) => (id === activeRestaurantId)!);
+	const restaurantsIds = useSelector(selectorRestaurantIds)
+	if (isLoading) return <div>...Loading</div>
 
 	return (
 		<div>
-			<RestaurantTabs
+			<RestaurantTabsContainer
 				onSelect={setActiveRestaurantId}
 				restaurantsIds={restaurantsIds}
 			/>
 
-			{activeId ? (
-				<RestaurantContainer id={activeId} />
+			{activeRestaurantId ? (
+				<RestaurantContainer id={activeRestaurantId} />
 			) : (
 				'No active restaurant'
 			)}

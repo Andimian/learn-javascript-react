@@ -20,8 +20,8 @@ export const dishSlice = createSlice({
 		// builder.addMatcher()) // можно проверить соответствует ли action по названию (типу) данному matcher-у
 		builder
 			.addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
-			// .addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
-				entityAdapter.setAll(state, payload);
+				// Тут именно addMany - я запарился, был какой-то set и он получается заменял все блюда (не сохранялись)
+				entityAdapter.addMany(state, payload);
 		});
 	},
 });

@@ -1,4 +1,4 @@
-import { Dish } from '../dish/component.tsx';
+import { DishContainer } from '../dish/container.tsx';
 
 export type MenuProps = {
 	dishIds: string[],
@@ -8,7 +8,7 @@ export const Menu = ({dishIds}: MenuProps ) => {
 	return (
 		<ul>
 			{dishIds.map((dishId	) => (
-				<li key={dishId}><Dish dishId={dishId} /></li>
+				<li key={dishId}><DishContainer dishId={dishId} /></li>
 			))}
 		</ul>
 	)

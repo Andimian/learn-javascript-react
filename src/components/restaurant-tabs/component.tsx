@@ -1,8 +1,8 @@
-import { RestaurantTabContainer } from '../restaurant-tab/component.tsx';
+import { RestaurantTabContainer } from '../restaurant-tab/container.tsx';
 
 type Props = {
-	onSelect: (id: string) => void,
-	restaurantsIds: string[];
+	onSelect:  React.Dispatch<React.SetStateAction<string | null>>,
+	restaurantsIds: string[],
 }
 
 export const RestaurantTabs = ({restaurantsIds, onSelect }: Props) => {

@@ -1,23 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
-import { normalizedUsers } from "../../../moks-data/normalized-mock";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getUsers, TUser } from './thunks/get-users.ts';
 
-type NormalizedRestaurant = {
-	id: string;
-	name: string;
-}
-
-type RestaurantEntities = {
-	[id: string]: NormalizedRestaurant;
-}
+const entityAdapter = createEntityAdapter<TUser>();
 
 export const userSlice = createSlice({
 	name: 'user',
-	initialState: {
-		entities: normalizedUsers.reduce((accum: RestaurantEntities, user) => {
-			accum[user.id] = user;
-			return accum;
-		}, {}),
-		ids: normalizedUsers.map(({id}) => id),
-	},
+	initialState: entityAdapter.getInitialState,
 	reducers: {},
+	extraReducers: (builder) => {
+		// builder.addMatcher()) // можно проверить соответствует ли action по названию (типу) данному matcher-у
+		builder
+			.addCase(getUsers.fulfilled, (state, { payload }) => {
+				// .addCase(getDishesByRestaurantId.fulfilled, (state, { payload }) => {
+				entityAdapter.setAll(state, payload);
+			});
+	},
 });

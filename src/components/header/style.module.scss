@@ -1,8 +1,9 @@
 .header {
-  background-color: #030000;
+  background-color: rgba(0, 0, 0, 0.84);
   display: grid;
-  grid-template-columns: auto 200px;
+  grid-template-columns: 100px auto 300px;
   grid-template-rows: 1fr;
+  overflow: hidden;
 
   h1 {
     display: flex;

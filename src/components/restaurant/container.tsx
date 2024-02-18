@@ -1,18 +1,24 @@
 import { FC, useContext } from 'react';
 import { UserAuthContext } from '../../contexts/authContext.tsx';
-import { useSelector } from 'react-redux';
-import { selectorRestaurantById } from '../../redux/entities/restaurant/selectors.tsx';
-import { RootState } from '../../redux';
 
 import { Restaurant } from './component.tsx';
+import { useGetRestaurantsQuery } from '../../redux/services/api.ts';
 
 export type restaurantProps  = {
-	id: string,
+	restaurantId: string,
 };
 
-export const RestaurantContainer: FC<restaurantProps> = ({id}) => {
+export const RestaurantContainer: FC<restaurantProps> = ({restaurantId}) => {
 	const { user } = useContext(UserAuthContext);
-	const restaurant = useSelector((state: RootState) => selectorRestaurantById(state, id));
+
+	const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+		selectFromResult: (result) => {
+			return ({
+				...result,
+				data: result.data.find(({ id }) => id === restaurantId),
+			})
+		}
+	});
 
 	/* В контейнерах лучше делать такую проверку, так как велика вероятность того, что данные не пришли */
 	if (!restaurant) {
@@ -20,7 +26,7 @@ export const RestaurantContainer: FC<restaurantProps> = ({id}) => {
 	}
 
 	return (
-		<Restaurant id={id} user={user} name={restaurant.name} menu={restaurant.menu}/>
+		<Restaurant id={restaurant.id} user={user} name={restaurant.name} menu={restaurant.menu}/>
 	);
 };
 

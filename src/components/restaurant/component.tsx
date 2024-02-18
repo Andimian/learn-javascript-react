@@ -6,14 +6,14 @@ import { User } from '../../contexts/authContext.tsx';
 import { MenuContainer } from '../menu/container.tsx';
 import { ReviewsContainer } from '../reviews/reviews-container.tsx';
 
-export type restaurantProps  = {
+export type Trestaurant  = {
 	name: string,
 	menu: string[],
 	user: User | null,
 	id: string,
 };
 
-export const Restaurant: FC<restaurantProps> = (props) => {
+export const Restaurant: FC<Trestaurant> = (props) => {
 
 	return (
 		<div>

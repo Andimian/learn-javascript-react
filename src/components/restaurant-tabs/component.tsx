@@ -1,18 +1,25 @@
-import { RestaurantTabContainer } from '../restaurant-tab/container.tsx';
+import { Tab } from '../tab/component.tsx';
 
 type Props = {
 	onSelect:  React.Dispatch<React.SetStateAction<string | null>>,
-	restaurantsIds: string[],
+	restaurants: {
+		id: string,
+		name: string,
+		description: string,
+		img: string,
+		menu: string[],
+		reviews: string[],
+	}[],
 }
 
-export const RestaurantTabs = ({restaurantsIds, onSelect }: Props) => {
+export const RestaurantTabs = ({restaurants, onSelect }: Props) => {
 	return (
 		<div>
-			{restaurantsIds.map((id) => (
-				<RestaurantTabContainer
+			{restaurants.map(({name, id}) => (
+				<Tab
 					key={id}
-					restaurantId={id}
-					onSelect={() => onSelect(id)}
+					title={name}
+					onClick={() => onSelect(id)}
 				/>
 			))}
 		</div>

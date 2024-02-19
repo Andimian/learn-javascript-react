@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FC, useCallback, } from 'react';
 import {  RootState } from '../../redux';
 import { Counter } from '../counter/component.tsx';
-import { decrement, increment, selectProductAmountById } from '../../redux/ui/cart';
+import { decrement, increment, selectProductAmountById, setAmount } from '../../redux/ui/cart';
 import { Dish } from './component.tsx';
 
 type Props = {
@@ -15,14 +15,11 @@ export type DishType = {
 	price: number;
 	ingredients: string[];
 }
-export const DishContainer: FC<Props> = ({dish}) => {
-	const {id: dishId} = dish;
-	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId));
-
+export const DishContainer: FC<Props> = ({dish: {id}}) => {
+	const amount = useSelector((state: RootState) => selectProductAmountById(state, id));
 	const dispatch = useDispatch();
-
-	const setAmount = useCallback(
-		(amount) => dispatch(setAmount({dishId, amount})),
+	const setAmountFn = useCallback(
+		(amount) => dispatch(setAmount({dishId: id, amount})),
 		[dishId, dispatch]
 	);
 	if (!dish) return null;

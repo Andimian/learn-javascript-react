@@ -6,13 +6,14 @@ type props = {
 	productIds: string[],
 }
 export const Cart: FC<props> = ({productIds}) => {
+
 	return (
 		<div className={styles.root}>
 			{productIds.length
-				? productIds.map((productId) => <DishContainer
-					dishId={productId}
-					key={productId}
-				/>)
+				? (dishes.map((dish) => (
+					<DishContainer
+						dish={dish}
+				/>)))
 				: "Empty"}
 		</div>
 	);

@@ -1,6 +1,5 @@
 // import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { DishType } from '../../components/dish/container.tsx';
 import { TReview } from '../../components/reviews/reviews.tsx';
 
 

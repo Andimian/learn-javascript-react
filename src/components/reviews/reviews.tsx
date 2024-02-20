@@ -2,12 +2,7 @@ import styles from './style.module.scss';
 import classNames from 'classnames';
 import { ReviewContainer } from '../review/container.tsx';
 import { FC } from 'react';
-
-export type TReview = {
-    id: string;
-    userId: string;
-    rating: string;
-}
+import { TReview } from '../../redux/entities/review/thunks/get-reviews.ts';
 
 export type ReviewsProps = {
     reviews: TReview[],

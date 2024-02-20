@@ -15,26 +15,18 @@ export type DishType = {
 	price: number;
 	ingredients: string[];
 }
-export const DishContainer: FC<Props> = ({dish: {id}}) => {
-	const amount = useSelector((state: RootState) => selectProductAmountById(state, id));
+export const DishContainer: FC<Props> = ({dish}) => {
+	const {id: dishId} = dish;
+	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId));
 	const dispatch = useDispatch();
-	const setAmountFn = useCallback(
-		(amount) => dispatch(setAmount({dishId: id, amount})),
+	const handleSetAmount = useCallback(
+		(amount) => dispatch(setAmount({dishId, amount})),
 		[dishId, dispatch]
 	);
 	if (!dish) return null;
 	return (
 		<>
-			<Dish dish={dish} amount={amount} setAmount={setAmount}/>
-			<Counter
-				increment={() => {
-					dispatch(increment(dish.id))
-				}}
-				decrement={() => {
-					dispatch(decrement(dish.id))
-				}}
-				value={amount}
-			/>
+			<Dish dish={dish} amount={amount} setAmount={handleSetAmount}/>
 		</>
 	);
 };

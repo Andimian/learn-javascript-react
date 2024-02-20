@@ -1,6 +1,7 @@
 import styles from "./style.module.scss";
 import classNames from "classnames";
-import { FC, } from 'react';
+import { FC } from 'react';
+import { Counter } from '../counter/component.tsx';
 
 export type DishType = {
 	id: string;
@@ -9,12 +10,29 @@ export type DishType = {
 	ingredients: string[];
 }
 
-export const Dish: FC<DishType> = (props) => {
+type Props = {
+	dish: DishType,
+	setAmount:  (amount: any) => {payload: any, type: "cart/setAmount"},
+	amount: number,
+}
+
+export const Dish: FC<Props> = ({dish, amount,  setAmount}) => {
+
 	return (
 		<div className={classNames(styles.dish)}>
-			<h3 className={classNames(styles.name)}>
-				{props.name}
-			</h3>
+			<div className={classNames(styles.name)}>
+				{dish.name}
+			</div>
+			<Counter
+				value={amount}
+				onChange={setAmount}
+				// increment={() => {
+				// 	dispatch(increment(dish.id))
+				// }}
+				// decrement={() => {
+				// 	dispatch(decrement(dish.id))
+				// }}
+			/>
 		</div>
 	);
 };

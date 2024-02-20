@@ -4,16 +4,17 @@ import styles from '../dish/style.module.scss';
 
 type Props = {
 	value: number,
-	increment: () => void,
-	decrement:  () => void,
+	onChange: (arg: number) => void,
+	// increment: () => void,
+	// decrement:  () => void,
 }
 
-export const Counter = ({value, increment, decrement}: Props) => {
+export const Counter = ({value, onChange}: Props) => {
 	return (
 		<div>
-			<Button disabled={value === 0} onClick={decrement} className={classNames(styles.countBtn)} title='-'/>
+			<Button disabled={value === 0} onClick={() => onChange(value - 1)} className={classNames(styles.countBtn)} title='-'/>
 			<span className={classNames(styles.count)}>{value}</span>
-			<Button disabled={value === 15} onClick={increment} className={classNames(styles.countBtn)} title='+'/>
+			<Button disabled={value === 15} onClick={() => onChange(value + 1)} className={classNames(styles.countBtn)} title='+'/>
 		</div>
 	);
 };

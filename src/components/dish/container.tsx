@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FC, useCallback, } from 'react';
 import {  RootState } from '../../redux';
-import { Counter } from '../counter/component.tsx';
 import { decrement, increment, selectProductAmountById, setAmount } from '../../redux/ui/cart';
 import { Dish } from './component.tsx';
 

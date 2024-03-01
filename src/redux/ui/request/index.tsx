@@ -10,33 +10,34 @@ interface ActionWithMeta extends Action {
 
 const initialState: Record<string, string> = {};
 export const requestSlice = createSlice({
-  name: "request",
-  initialState,
-  selectors: {
-    selectIsLoading: (state, id) => state[id] === REQUEST_STATUS.pending,
-    selectIsFulfilled: (state, id: string) => state[id] === REQUEST_STATUS.success,
-  },
-  extraReducers: (builder) =>
+    name: "request",
+    initialState,
+    selectors: {
+        selectStatus: (state, id) => state[id] || REQUEST_STATUS.idle,
+        selectIsLoading: (state, id) => state[id] === REQUEST_STATUS.pending,
+        selectIsFulfilled: (state, id: string) => state[id] === REQUEST_STATUS.success,
+    },
+    extraReducers: (builder) =>
     builder
-      .addMatcher(
+    .addMatcher(
         ({ type }) => type.endsWith("/pending"),
         (state, action) => {
-          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.pending;
+        state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.pending;
         }
-      )
-      .addMatcher(
+    )
+    .addMatcher(
         ({ type }) => type.endsWith("/fulfilled"),
         (state, action) => {
-          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.success;
+        state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.success;
         }
-      )
-      .addMatcher(
+    )
+    .addMatcher(
         ({ type }) => type.endsWith("/rejected"),
         (state, action) => {
-          state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.fail;
+        state[(action as ActionWithMeta).meta.requestId] = REQUEST_STATUS.fail;
         }
-      ),
+    ),
     reducers: {},
 });
 
-export const { selectIsLoading } = requestSlice.selectors;
+export const { selectIsLoading, selectStatus, selectIsFulfilled } = requestSlice.selectors;

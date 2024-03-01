@@ -1,6 +1,5 @@
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TReview } from '../../components/reviews/reviews.tsx';
+import { TReview } from '../entities/review/thunks/get-reviews.ts';
 
 
 export const api = createApi(

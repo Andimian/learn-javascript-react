@@ -1,11 +1,23 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TReview } from '../entities/review/thunks/get-reviews.ts';
 
+export type IRestaurant = {
+	id: string,
+	name: string,
+	description: string,
+	img: string,
+	menu: string[],
+	reviews: string[],
+}
+
+type TagType = "Review" | "Restaurant";
 
 export const api = createApi(
 	{
 		reducerPath: 'api',
-		// todo это что
+		/* Теги позволяют пометить какие-то данные как невалидные, ниже определяем типы тегов, назвать
+		* можно в принципе хоть как, но вот как пример можно называть по типу сущности и ниже где запрос
+		* нужно пометить тегами с помощью providesTags */
 		tagTypes: ['Review', 'Restaurant'],
 
 		// корневой endpoint
@@ -13,7 +25,7 @@ export const api = createApi(
 			baseUrl: "http://localhost:3001/api/"
 		}),
 		endpoints: (builder) => ({
-			getRestaurants: builder.query({
+			getRestaurants: builder.query<IRestaurant[], unknown>({
 				query: () => ({ url: 'restaurants' }),
 			}),
 			getUsers: builder.query({
@@ -30,13 +42,16 @@ export const api = createApi(
 					url: 'reviews',
 					params: { restaurantId },
 				}),
+				/* Должна вернуть определенное количество тегов. Короче когда с какой-то кверИ получаем
+				результат, к этому результату могут быть добавлены теги и когда мы скажем, что какой-то из этих тегов
+				не валидный, то эти данные (этой кверИ с этими параметрами) будут перезапрошены */
 				providesTags: (result, _, restaurantId) =>
 					result
-						.map(({ id }) => ({ type: 'Review', id }))
+						?.map(({ id }) => ({ type: "Review" as TagType, id }))
 						.concat(
-							{ type: 'Review', id: 'All' },
-							{ type: 'Restaurant', id: restaurantId }
-						),
+							{ type: "Review", id: "ALL" },
+							{ type: "Restaurant", id: restaurantId }
+						) ?? [],
 			}),
 			createReview: builder.mutation({
 				query: ({ restaurantId, newReview }) => ({
@@ -44,18 +59,19 @@ export const api = createApi(
 					method: 'POST',
 					body: newReview,
 				}),
+				// массив невалидных тегов
 				invalidatesTags: (result, _, { restaurantId }) => [
 					{ type: 'Restaurant', id: restaurantId },
 				],
 			}),
 			updateReview: builder.mutation({
-				query: ({ review }) => ({
-					url: `review/${review.id}`,
+				query: ({ reviewId, review }) => ({
+					url: `review/${reviewId}`,
 					method: 'PATCH',
 					body: review,
 				}),
-				invalidatesTags: (result, _, { review }) => [
-					{ type: 'Review', id: review.id },
+				invalidatesTags: (result, _, { reviewId }) => [
+					{ type: 'Review', id: reviewId },
 				],
 			}),
 		}),

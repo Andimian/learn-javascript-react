@@ -7,9 +7,13 @@ type Props = {
 }
 
 export const RestaurantTabsContainer: FC<Props> =  (props) => {
-	const {data: restaurants, isLoading} = useGetRestaurantsQuery();
+	const {data: restaurants, isLoading} = useGetRestaurantsQuery(undefined);
 
 	if (isLoading) return <div>Loading...</div>
+
+	if (!restaurants) {
+		return null;
+	}
 
 	return (
 		<div>

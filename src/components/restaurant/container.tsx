@@ -15,7 +15,7 @@ export const RestaurantContainer: FC<restaurantProps> = ({restaurantId}) => {
 		selectFromResult: (result) => {
 			return ({
 				...result,
-				data: result.data.find(({ id }) => id === restaurantId),
+				data: result.data?.find(({ id }) => id === restaurantId),
 			})
 		}
 	});

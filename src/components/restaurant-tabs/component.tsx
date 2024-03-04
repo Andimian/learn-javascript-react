@@ -1,15 +1,9 @@
 import { Tab } from '../tab/component.tsx';
+import { IRestaurant } from '../../redux/services/api.ts';
 
 type Props = {
 	onSelect:  React.Dispatch<React.SetStateAction<string | null>>,
-	restaurants: {
-		id: string,
-		name: string,
-		description: string,
-		img: string,
-		menu: string[],
-		reviews: string[],
-	}[],
+	restaurants: IRestaurant[],
 }
 
 export const RestaurantTabs = ({restaurants, onSelect }: Props) => {

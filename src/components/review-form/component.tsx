@@ -56,9 +56,28 @@ const reducer = (state: State, { type, payload }: Action): State => {
     }
 }
 
+type Props = {
+    className?: string;
+    initialState?: IReviewForm;
+    userName: string;
+    showCancelBtn?: boolean;
+    onSave: (newReview: IReviewForm) => void;
+    onCancel?: () => void;
+};
 
+export interface IReviewForm {
+    text: string;
+    rating: number;
+}
 
-export const ReviewForm = () => {
+export const ReviewForm: React.FC<Props> = ({
+   className,
+   initialState,
+   userName,
+   showCancelBtn,
+   onSave,
+   onCancel,
+}) => {
     /* Функция редуктор (reducer) первым аргументом. Вторым аргументом будут некоторые данные (initialiserArg или
     initialState). Обязательный. Если мы передали только два аргумента - эти данные будут начальным состоянием. Третий
     аргумент необязательный (initialiser) - это функция, которая будет вызвана единственный раз при монтировании

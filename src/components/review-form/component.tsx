@@ -1,6 +1,7 @@
 import styles from './style.module.scss';
 import classNames from 'classnames';
 import { useReviewForm } from './use-review-form.tsx';
+import { FormEvent } from 'react';
 
 /* Когда использовать useReducer
 Не существует строгого правила, когда нужно использовать useState, а когда useReducer. Но есть некоторые признаки, по
@@ -89,10 +90,13 @@ export const ReviewForm: React.FC<Props> = ({
     // const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
     // const { user } = useContext(UserAuthContext);
     const { form, setText, setRating } = useReviewForm(initialState);
-
+    const onSubmit = (ev: FormEvent<HTMLFormElement>) => {
+        ev.preventDefault();
+    }
 
     return (
-        <form name="reviewForm" className={classNames(className, styles.root)}>
+        <form onSubmit={(event) => onSubmit(event)}
+            name="reviewForm" className={classNames(className, styles.root)}>
             <div className={styles.root}>
                 <label htmlFor="name">User name</label>
                 <input name="name" type="text" disabled={true} value={userName}></input>

@@ -48,6 +48,9 @@ const reducer = (state: State, { type, payload }: Action): State => {
 export const AuthForm = ({closeModal, className}: Prop ) => {
     const {setUser} = useContext(UserAuthContext);
     const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
+    // const [userName, setUserName] = useState<string>("");
+    // const [email, setEmail] = useState<string>("test@test.test");
+
 
     return (
         <div className={styles.authModal}>
@@ -76,8 +79,8 @@ export const AuthForm = ({closeModal, className}: Prop ) => {
             <Button title={"Войти"}
                     onClick={() => {
                         if (form.name.length > 0) {
-                        setUser({name: form.name, email: form.email});
-                        closeModal();
+                            setUser({name: form.name, email: form.email, id: 'a304959a-76c0-4b34-954a-b38dbf310360'});
+                            closeModal();
                         }
                     }}
                     disabled={form.name.length === 0}

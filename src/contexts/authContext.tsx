@@ -1,13 +1,9 @@
 import React from 'react';
+import { TUser } from '../types.tsx';
 
 type UserContext = {
-    user: User | null;
-    setUser: (user: User | null) => void;
-}
-
-export type User = {
-    name: string;
-    email: string;
+    user: TUser | null;
+    setUser: (user: TUser | null) => void;
 }
 
 // Параметром передается значение по умолчанию

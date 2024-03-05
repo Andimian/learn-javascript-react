@@ -1,14 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TReview } from '../entities/review/thunks/get-reviews.ts';
-
-export type IRestaurant = {
-	id: string,
-	name: string,
-	description: string,
-	img: string,
-	menu: string[],
-	reviews: string[],
-}
+import { IRestaurant, TUser } from '../../types.tsx';
 
 type TagType = "Review" | "Restaurant";
 
@@ -28,7 +20,7 @@ export const api = createApi(
 			getRestaurants: builder.query<IRestaurant[], unknown>({
 				query: () => ({ url: 'restaurants' }),
 			}),
-			getUsers: builder.query({
+			getUsers: builder.query<TUser[], unknown>({
 				query: () => ({ url: 'users' }),
 			}),
 			getDishesByRestaurantId: builder.query({
@@ -60,9 +52,12 @@ export const api = createApi(
 					body: newReview,
 				}),
 				// массив невалидных тегов
-				invalidatesTags: (result, _, { restaurantId }) => [
-					{ type: 'Restaurant', id: restaurantId },
-				],
+				invalidatesTags: (result, _, { restaurantId }) => {
+					console.log(result);
+					return [
+						{ type: 'Restaurant', id: restaurantId },
+					]
+				},
 			}),
 			updateReview: builder.mutation({
 				query: ({ reviewId, review }) => ({
@@ -70,9 +65,13 @@ export const api = createApi(
 					method: 'PATCH',
 					body: review,
 				}),
-				invalidatesTags: (result, _, { reviewId }) => [
-					{ type: 'Review', id: reviewId },
-				],
+				invalidatesTags: (result, _, { reviewId }) => {
+					console.log(result);
+					return [
+						{ type: 'Review', id: reviewId },
+					];
+				}
+
 			}),
 		}),
 	}

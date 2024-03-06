@@ -2,6 +2,7 @@ import { Button } from "../button/component.tsx";
 import { useContext, useReducer } from "react";
 import { UserAuthContext } from "../../contexts/authContext.tsx";
 import styles from './style.module.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 type Prop = {
     closeModal: () => void,
@@ -46,7 +47,7 @@ const reducer = (state: State, { type, payload }: Action): State => {
 }
 
 export const AuthForm = ({closeModal, className}: Prop ) => {
-    const {setUser} = useContext(UserAuthContext);
+    const {user, setUser} = useContext(UserAuthContext);
     const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
     // const [userName, setUserName] = useState<string>("");
     // const [email, setEmail] = useState<string>("test@test.test");
@@ -54,6 +55,7 @@ export const AuthForm = ({closeModal, className}: Prop ) => {
 
     return (
         <div className={styles.authModal}>
+            <div>{user?.name}</div>
             <div className={className}>
                 <label htmlFor="name">Имя</label>
                 <input
@@ -79,7 +81,8 @@ export const AuthForm = ({closeModal, className}: Prop ) => {
             <Button title={"Войти"}
                     onClick={() => {
                         if (form.name.length > 0) {
-                            setUser({name: form.name, email: form.email, id: 'a304959a-76c0-4b34-954a-b38dbf310360'});
+                            setUser({name: form.name, email: form.email, id: uuidv4()});
+
                             closeModal();
                         }
                     }}

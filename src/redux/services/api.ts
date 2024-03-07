@@ -3,6 +3,9 @@ import { TReview } from '../entities/review/thunks/get-reviews.ts';
 import { IRestaurant, TUser } from '../../types.tsx';
 
 type TagType = "Review" | "Restaurant";
+export interface UpdateReviewRequest {
+	updatedReview: TReview;
+}
 
 export const api = createApi(
 	{
@@ -59,16 +62,16 @@ export const api = createApi(
 					]
 				},
 			}),
-			updateReview: builder.mutation({
-				query: ({ reviewId, review }) => ({
-					url: `review/${reviewId}`,
+			updateReview: builder.mutation<unknown, UpdateReviewRequest>({
+				query: ({ updatedReview }) => ({
+					url: `review/${updatedReview.id}`,
 					method: 'PATCH',
-					body: review,
+					body: updatedReview,
 				}),
-				invalidatesTags: (result, _, { reviewId }) => {
+				invalidatesTags: (result, _, { updatedReview }) => {
 					console.log(result);
 					return [
-						{ type: 'Review', id: reviewId },
+						{ type: 'Review', id: updatedReview.id },
 					];
 				}
 

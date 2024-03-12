@@ -1,18 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState: Record<string, number> = {};
-type test = {
-	string: number;
-}
-const initialState: Record<string, test[]> = {};
+const initialState: Record<string, Record<string, number>> = {};
 
 export const cartSlice = createSlice({
 	name: "cart",
 	/* Храниться будет примерно так:
 	initialState: {
-		restaurantId: [
+		restaurantId: {
 			dishId: number,
-		],
+		},
 	}
 	, то есть по
 	* каждому ресторану у нас кусочек корзины и потом когда будем доставать - будем доставать кусок корзины по
@@ -22,24 +18,23 @@ export const cartSlice = createSlice({
 	reducers: {
 		increment: (state, { payload: {dishId, restaurantId} }) => {
 			if (!state[restaurantId]) {
-				state[restaurantId]= [];
+				state[restaurantId] = {};
 			}
-			if (!state[restaurantId][dishId]) {
-				state[restaurantId].dishId= [];
+
+			state[restaurantId][dishId] = (state[restaurantId][dishId] || 0) + 1;
+		},
+		decrement: (state, { payload: {dishId, restaurantId} }) => {
+			if (!state[restaurantId]) {
+				state[restaurantId] = {};
 			}
-			state.restaurantId[dishId] = 1;
+
+			state[restaurantId][dishId] = (state[restaurantId][dishId] || 0) - 1;
 		},
-		decrement: (state, { payload: productId }) => {
-			// state[productId] = (state[productId] || 0) - 1;
-			// if (state[productId] <= 0) {
-			// 	delete state[productId];
-			// }
-		},
-		setAmount: (state, { payload: {dishId, amount} }) => {
-			// state[dishId] = amount;
-			// if (state[dishId] <= 0) {
-			// 	delete state[dishId];
-			// }
+		setAmount: (state, { payload: {dishId, restaurantId, amount} }) => {
+			state[restaurantId][dishId] = amount;
+			if (state[restaurantId][dishId] <= 0) {
+				delete state[restaurantId][dishId];
+			}
 		},
 	},
 	selectors: {
@@ -47,8 +42,11 @@ export const cartSlice = createSlice({
 			return state[productId] || 0;
 		},
 		selectProductAmount: (state) =>
-			Object.values(state).reduce((acc, amount) => {
-				return acc + amount;
+			Object.values(state).reduce((acc, dishesWithAmount) => {
+				return acc + Object.values(dishesWithAmount).reduce(
+					(acc, amount) => acc + amount,
+					0
+				);
 			}, 0),
 		selectCartProductIds: (state) => Object.keys(state),
 	},

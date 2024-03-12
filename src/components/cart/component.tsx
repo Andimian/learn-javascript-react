@@ -10,7 +10,7 @@ export const Cart: FC<props> = ({productIds}) => {
 	return (
 		<div className={styles.root}>
 			{productIds.length
-				? (dishes.map((dish) => (
+				? (productIds.map((dish) => (
 					<DishContainer
 						dish={dish}
 				/>)))

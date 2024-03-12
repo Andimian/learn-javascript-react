@@ -26,12 +26,6 @@ export const Dish: FC<Props> = ({dish, amount,  setAmount}) => {
 			<Counter
 				value={amount}
 				onChange={setAmount}
-				// increment={() => {
-				// 	dispatch(increment(dish.id))
-				// }}
-				// decrement={() => {
-				// 	dispatch(decrement(dish.id))
-				// }}
 			/>
 		</div>
 	);

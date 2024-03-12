@@ -5,8 +5,6 @@ import styles from '../dish/style.module.scss';
 type Props = {
 	value: number,
 	onChange: (arg: number) => void,
-	// increment: () => void,
-	// decrement:  () => void,
 }
 
 export const Counter = ({value, onChange}: Props) => {

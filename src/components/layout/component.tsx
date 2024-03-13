@@ -9,10 +9,6 @@ type Props = {
 }
 
 export const Layout = ({children}: Props) => {
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(getDish())
-	// }, []);
 
 	return (
 		<div className={styles.parent}>

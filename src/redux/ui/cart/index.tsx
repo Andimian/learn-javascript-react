@@ -16,20 +16,6 @@ export const cartSlice = createSlice({
 	* в корзине этого ресторана)*/
 	initialState,
 	reducers: {
-		increment: (state, { payload: {dishId, restaurantId} }) => {
-			if (!state[restaurantId]) {
-				state[restaurantId] = {};
-			}
-
-			state[restaurantId][dishId] = (state[restaurantId][dishId] || 0) + 1;
-		},
-		decrement: (state, { payload: {dishId, restaurantId} }) => {
-			if (!state[restaurantId]) {
-				state[restaurantId] = {};
-			}
-
-			state[restaurantId][dishId] = (state[restaurantId][dishId] || 0) - 1;
-		},
 		setAmount: (state, { payload: {dishId, restaurantId, amount} }) => {
 			state[restaurantId][dishId] = amount;
 			if (state[restaurantId][dishId] <= 0) {
@@ -57,4 +43,4 @@ export const {
 	selectProductAmount,
 	selectCartProductIds,
 } = cartSlice.selectors;
-export const { increment, decrement, setAmount } = cartSlice.actions;
+export const { setAmount } = cartSlice.actions;

@@ -5,7 +5,7 @@ import { ReactElement } from 'react';
 type Props = {
 	onClick: () => void,
 	title: string,
-	children?: ReactElement<any, any>,
+	children?: ReactElement<any, any>[],
 	disabled?: boolean,
 	className?: string,
 }

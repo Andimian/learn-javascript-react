@@ -5,6 +5,7 @@
 
 }
 .btn {
+  position: relative;
   height: 80px;
   width: 80px;
   background-color: transparent;
@@ -15,6 +16,16 @@
     width: 100%;
     object-fit: contain;
   }
+}
+
+.productCount {
+  position: absolute;
+  top: 60%;
+  left: 80%;
+  background-color: aliceblue;
+  border-radius: 50%;
+  width: 28px;
+  height: 29px;
 }
 
 .modal {

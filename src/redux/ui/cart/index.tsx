@@ -1,6 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: Record<string, Record<string, number>> = {};
+
+export interface SetAmountParams {
+	restaurantId: string;
+	dishId: string;
+	amount: number;
+}
 
 export const cartSlice = createSlice({
 	name: "cart",
@@ -16,15 +22,25 @@ export const cartSlice = createSlice({
 	* в корзине этого ресторана)*/
 	initialState,
 	reducers: {
-		setAmount: (state, { payload: {dishId, restaurantId, amount} }) => {
+		setAmount: (state, action: PayloadAction<SetAmountParams>) => {
+			const { restaurantId, dishId, amount } = action.payload;
+			if (!state[restaurantId]) {
+				state[restaurantId] = {};
+			}
 			state[restaurantId][dishId] = amount;
 			if (state[restaurantId][dishId] <= 0) {
 				delete state[restaurantId][dishId];
+				if (!Object.keys(state[restaurantId])?.length) {
+					delete state[restaurantId];
+				}
 			}
+		},
+		clearCart: (state) => {
+			Object.keys(state).forEach((key: string) => delete state[key]);
 		},
 	},
 	selectors: {
-		selectProductAmountById: (state, productId) => {
+		selectProductAmountById: (state, productId, restaurantId: string,) => {
 			return state[productId] || 0;
 		},
 		selectProductAmount: (state) =>

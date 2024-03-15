@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TReview } from '../entities/review/thunks/get-reviews.ts';
-import { IRestaurant, TUser } from '../../types.tsx';
+import { IRestaurant, TDish, TUser } from '../../types.tsx';
 
 type TagType = "Review" | "Restaurant";
 export interface UpdateReviewRequest {
@@ -26,7 +26,7 @@ export const api = createApi(
 			getUsers: builder.query<TUser[], unknown>({
 				query: () => ({ url: 'users' }),
 			}),
-			getDishesByRestaurantId: builder.query({
+			getDishesByRestaurantId: builder.query<TDish[], string>({
 				query: (restaurantId) => ({
 					url: 'dishes',
 					params: { restaurantId },

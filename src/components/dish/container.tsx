@@ -17,7 +17,7 @@ export type DishType = {
 	ingredients: string[];
 }
 export const DishContainer: FC<Props> = ({restaurantId, dishId}) => {
-	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId));
+	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId, restaurantId));
 
 	const { data: dish } = useGetDishesByRestaurantIdQuery(restaurantId, {
 		selectFromResult: (result) => ({

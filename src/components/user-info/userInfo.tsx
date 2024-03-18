@@ -1,29 +1,27 @@
 import styles from "./style.module.scss";
 import { Login } from '../login/component.tsx';
-import { Button } from '../button/component.tsx';
-import cart from '../../assets/img/cart.png';
 import { useState } from 'react';
 import { Modal } from '../modal/component.tsx';
 import { CartContainer } from '../cart/container.tsx';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux';
-import { selectProductAmount } from '../../redux/ui/cart';
+import CartBtnContainer from '../cartBtn/container.tsx';
 
 const UserInfo = () => {
 	const [ isOpen, setIsOpen ] = useState(false);
 	const closeModal = () => setIsOpen(false);
-	const totalAmount = useSelector((state: RootState) =>
-		selectProductAmount(state)
-	);
+
+	const handleClick = () => {
+		if (isOpen === true) {
+			setIsOpen(false);
+			return;
+		}
+		setIsOpen(true);
+	}
 
 	return (
 		<div className={styles.root}>
 			<Login/>
 
-			<Button title={''} onClick={() => setIsOpen(true)} className={styles.btn}>
-				<img src={cart} alt=""/>
-				{!!totalAmount > 0 && (<div className={styles.productCount}>{totalAmount}</div>)}
-			</Button>
+			<CartBtnContainer onClick={handleClick} className={styles.btn}/>
 
 			{isOpen && (
 				<Modal onClose={closeModal} className={styles.modal}>

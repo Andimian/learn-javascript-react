@@ -40,8 +40,14 @@ export const cartSlice = createSlice({
 		},
 	},
 	selectors: {
-		selectProductAmountById: (state, productId, restaurantId: string,) => {
-			return state[productId] || 0;
+		selectProductAmountById: (
+			state,
+			restaurantId: string,
+			productId: string,
+			) => {
+			return state[restaurantId] && state[restaurantId][productId]
+				? state[restaurantId][productId]
+				: 0;
 		},
 		selectProductAmount: (state) =>
 			Object.values(state).reduce((acc, dishesWithAmount) => {

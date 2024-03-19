@@ -2,13 +2,17 @@ import { DishContainer, DishType } from '../dish/container.tsx';
 
 export type MenuProps = {
 	dishes: DishType[],
+	restaurantId: string,
 };
 
-export const Menu = ({dishes}: MenuProps ) => {
+export const Menu = ({dishes, restaurantId}: MenuProps ) => {
+
 	return (
 		<ul>
 			{dishes.map((dish	) => (
-				<li key={dish.id}><DishContainer dish={dish} /></li>
+				/* Тут передаем id, а не сущность потому что корзина нормально работает только с
+				* redux Toolkit (соответственно там нужны id) */
+				<li key={dish.id}><DishContainer dishId={dish.id}  restaurantId={restaurantId} /></li>
 			))}
 		</ul>
 	)

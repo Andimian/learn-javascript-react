@@ -40,29 +40,38 @@ export const cartSlice = createSlice({
 		},
 	},
 	selectors: {
-		selectProductAmountById: (
+		selectDishAmountById: (
 			state,
 			restaurantId: string,
-			productId: string,
-			) => {
+			productId: string
+		) => {
 			return state[restaurantId] && state[restaurantId][productId]
 				? state[restaurantId][productId]
 				: 0;
 		},
-		selectProductAmount: (state) =>
-			Object.values(state).reduce((acc, dishesWithAmount) => {
-				return acc + Object.values(dishesWithAmount).reduce(
-					(acc, amount) => acc + amount,
-					0
-				);
-			}, 0),
-		selectCartProductIds: (state) => Object.keys(state),
+
+		selectProductAmount: (state) => {
+			return Object.values(state).reduce(
+				(acc: number, dishesWithAmount: Record<string, number>) =>
+					acc +
+					Object.values(dishesWithAmount).reduce(
+						(acc, amount) => acc + amount,
+						0
+					),
+				0
+			);
+		},
+
+		/* Получить все блюда из текущего стейта
+		* Короче тут есть косяк с циклической перерисовкой */
+		selectCartProductIds: (state) => Object.entries(state),
+
 	},
 });
 
 export const {
-	selectProductAmountById,
+	selectDishAmountById,
 	selectProductAmount,
 	selectCartProductIds,
 } = cartSlice.selectors;
-export const { setAmount } = cartSlice.actions;
+export const { setAmount, clearCart } = cartSlice.actions;

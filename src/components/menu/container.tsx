@@ -9,12 +9,12 @@ export const MenuContainer = ({restaurantId}: MenuProps ) => {
 	const {data: dishes, isFetching} = useGetDishesByRestaurantIdQuery(restaurantId);
 
 	if (isFetching) return <div>Loading...</div>;
-	if (!dishes.length) return null;
+	if (!dishes) return null;
 	return (
 		<>
 			{isFetching
 				? ('Loading...')
-			: <Menu dishes={dishes}/>
+			: <Menu dishes={dishes} restaurantId={restaurantId}/>
 			}
 		</>
 )

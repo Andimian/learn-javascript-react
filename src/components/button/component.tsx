@@ -16,6 +16,7 @@ export const Button = ({onClick, title, className, disabled, children}: Props) =
 			[styles.enabled]: disabled === false,
 		})}
 		onClick={onClick}
+		disabled={disabled}
 	>
 		{title}{children}
 	</button>;

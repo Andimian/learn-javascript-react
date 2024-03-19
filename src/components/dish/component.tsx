@@ -18,7 +18,6 @@ type Props = {
 }
 
 export const Dish: FC<Props> = ({dish, amount,  setAmount}) => {
-
 	return (
 		<div className={classNames(styles.dish)}>
 			<div className={classNames(styles.name)}>

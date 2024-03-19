@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FC, useCallback, } from 'react';
 import {  RootState } from '../../redux';
-import { selectProductAmountById, setAmount } from '../../redux/ui/cart';
+import { selectDishAmountById, setAmount } from '../../redux/ui/cart';
 import { Dish } from './component.tsx';
 import { useGetDishesByRestaurantIdQuery } from '../../redux/services/api.ts';
 
@@ -17,8 +17,7 @@ export type DishType = {
 	ingredients: string[];
 }
 export const DishContainer: FC<Props> = ({restaurantId, dishId}) => {
-	const amount = useSelector((state: RootState) => selectProductAmountById(state, dishId, restaurantId));
-
+	const amount = useSelector((state: RootState) => selectDishAmountById(state, restaurantId, dishId));
 	const { data: dish } = useGetDishesByRestaurantIdQuery(restaurantId, {
 		selectFromResult: (result) => ({
 			...result,
@@ -29,9 +28,9 @@ export const DishContainer: FC<Props> = ({restaurantId, dishId}) => {
 	const dispatch = useDispatch();
 
 	const handleSetAmount = useCallback(
-		(amount: number) =>
-			dispatch(setAmount({ dishId: dishId, amount, restaurantId })),
-		[dishId, dispatch, restaurantId]
+		(amount: number) =>{
+			dispatch(setAmount({ dishId: dishId, amount, restaurantId }))
+		}, [dishId, dispatch, restaurantId]
 	);
 
 	if (!dish) return null;

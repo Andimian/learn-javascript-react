@@ -27,7 +27,7 @@ export const api = createApi(
 				query: () => ({ url: 'users' }),
 			}),
 			getDishesByRestaurantId: builder.query<TDish[], string>({
-				query: (restaurantId) => ({
+				query: (restaurantId: string) => ({
 					url: 'dishes',
 					params: { restaurantId },
 				}),

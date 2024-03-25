@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Provider, } from 'react-redux';
 import { store } from '../redux';
 import { Layout } from './layout/component.tsx';
-import { RestaurantPage } from './pages/restaurant-page/component.tsx';
 import { TUser } from '../types.tsx';
 import { UserAuthContext } from "../contexts/authContext.tsx";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { HomePage } from './pages/home-page/component.tsx';
+import { RestaurantsPage } from './pages/restaurants-page/component.tsx';
+import { RestaurantContainer } from './restaurant/container.tsx';
+import { MenuContainer } from './menu/container.tsx';
 
 
 export const App = () => {
@@ -27,7 +29,7 @@ export const App = () => {
                 },
                 {
                     path: "restaurants",
-                    element: <RestaurantPage />,
+                    element: <RestaurantsPage />,
                     children: [
                         {
                             path: ":restaurantId",

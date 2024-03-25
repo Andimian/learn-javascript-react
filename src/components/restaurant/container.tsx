@@ -1,15 +1,12 @@
 import { FC, useContext } from 'react';
 import { UserAuthContext } from '../../contexts/authContext.tsx';
-
 import { Restaurant } from './component.tsx';
 import { useGetRestaurantsQuery } from '../../redux/services/api.ts';
+import { useParams } from 'react-router-dom';
 
-export type restaurantProps  = {
-	restaurantId: string,
-};
-
-export const RestaurantContainer: FC<restaurantProps> = ({restaurantId}) => {
+export const RestaurantContainer: FC = () => {
 	const { user } = useContext(UserAuthContext);
+	const {restaurantId} = useParams();
 
 	const { data: restaurant } = useGetRestaurantsQuery(undefined, {
 		selectFromResult: (result) => {

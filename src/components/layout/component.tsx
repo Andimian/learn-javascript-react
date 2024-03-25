@@ -1,20 +1,18 @@
 import { Header } from '../header/component.tsx';
-import { ReactNode,  } from 'react';
 import { Footer } from '../footer/footer.tsx';
 import classNames from 'classnames';
 import styles from "../layout/style.module.scss";
+import { Outlet } from 'react-router-dom';
 
-type Props = {
-	children: ReactNode,
-}
-
-export const Layout = ({children}: Props) => {
+export const Layout = () => {
 
 	return (
 		<div className={styles.parent}>
 			<div className={classNames(styles.layout)}>
 				<Header/>
-				<div className={classNames(styles.container)}>{children}</div>
+				<div className={classNames(styles.container)}>
+					<Outlet/>
+				</div>
 				<Footer/>
 			</div>
 			<div id="modal-container"></div>

@@ -13,11 +13,15 @@ export type DishType = {
 
 type Props = {
 	dish: TDish,
-	setAmount:  (amount: number) => void,
+	setAmount?:  (amount: number) => void,
 	amount?: number,
 }
 
 export const Dish: FC<Props> = ({dish, amount,  setAmount}) => {
+	if (!dish) {
+		return null;
+	}
+
 	return (
 		<div className={classNames(styles.dish)}>
 			<div className={classNames(styles.name)}>

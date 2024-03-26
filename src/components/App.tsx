@@ -9,6 +9,9 @@ import { HomePage } from './pages/home-page/component.tsx';
 import { RestaurantsPage } from './pages/restaurants-page/component.tsx';
 import { RestaurantContainer } from './restaurant/container.tsx';
 import { MenuContainer } from './menu/container.tsx';
+import { DishPage } from './pages/dish-page/component.tsx';
+import { ReviewsContainer } from './reviews/reviews-container.tsx';
+import Logo from './logo/logo.tsx';
 
 
 export const App = () => {
@@ -54,6 +57,10 @@ export const App = () => {
                 {
                     path: "dish/:dishId",
                     element: <DishPage />,
+                },
+                {
+                    path: "v",
+                    element: <Logo />,
                 },
             ],
         },

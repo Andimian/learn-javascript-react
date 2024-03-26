@@ -1,13 +1,10 @@
-import { Menu } from './component.tsx';
-import { useGetDishesByRestaurantIdQuery, } from '../../redux/services/api.ts';
 import { useParams } from 'react-router-dom';
-
-export type MenuProps = {
-	restaurantId: string,
-};
+import { useGetDishesByRestaurantIdQuery } from '../../redux/services/api.ts';
+import { Menu } from './component.tsx';
 
 export const MenuContainer = () => {
-	const { restaurantId } = useParams();
+	let { restaurantId } = useParams();
+	restaurantId = restaurantId ? restaurantId : '';
 	const {data: dishes, isFetching} = useGetDishesByRestaurantIdQuery(restaurantId);
 
 	if (isFetching) return <div>Loading...</div>;

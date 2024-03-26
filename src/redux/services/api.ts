@@ -20,12 +20,21 @@ export const api = createApi(
 			baseUrl: "http://localhost:3001/api/"
 		}),
 		endpoints: (builder) => ({
+			// Получить все рестораны
 			getRestaurants: builder.query<IRestaurant[], unknown>({
 				query: () => ({ url: 'restaurants' }),
 			}),
+			// Получить всех пользователей
 			getUsers: builder.query<TUser[], unknown>({
 				query: () => ({ url: 'users' }),
 			}),
+			// Получить блюдо по id
+			getDishById: builder.query<TDish, string>({
+				query: (dishId: string) => ({
+					url: `dish/${dishId}`,
+				}),
+			}),
+			// Получить блюда по ресторану
 			getDishesByRestaurantId: builder.query<TDish[], string>({
 				query: (restaurantId: string) => ({
 					url: 'dishes',
@@ -83,6 +92,7 @@ export const api = createApi(
 export const {
 	useGetUsersQuery,
 	useGetRestaurantsQuery,
+	useGetDishByIdQuery,
 	useGetDishesByRestaurantIdQuery,
 	useGetReviewsByRestaurantIdQuery,
 	useCreateReviewMutation,

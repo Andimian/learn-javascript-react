@@ -5,6 +5,7 @@ export type MenuProps = {
 	restaurantId: string,
 };
 
+/** Все блюда ресторана */
 export const Menu = ({dishes, restaurantId}: MenuProps ) => {
 
 	return (

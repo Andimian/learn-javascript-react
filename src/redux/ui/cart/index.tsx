@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: Record<string, Record<string, number>> = {};
+// const initialState: Record<string, number> = {};
 
 export interface SetAmountParams {
 	restaurantId: string;

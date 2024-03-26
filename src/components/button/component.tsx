@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 import { ReactElement } from 'react';
 
 type Props = {
-	onClick: () => void,
+	onClick?: () => void,
 	title: string,
 	children?: ReactElement<any, any>[],
 	disabled?: boolean,

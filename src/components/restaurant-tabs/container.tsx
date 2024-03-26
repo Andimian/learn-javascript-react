@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { RestaurantTabs } from './component.tsx';
 import { useGetRestaurantsQuery } from '../../redux/services/api.ts';
 
-type Props = {
-	onSelect:  React.Dispatch<React.SetStateAction<string | null>>,
-}
-
-export const RestaurantTabsContainer: FC<Props> =  (props) => {
+export const RestaurantTabsContainer: FC =  () => {
 	const {data: restaurants, isLoading} = useGetRestaurantsQuery(undefined);
 
 	if (isLoading) return <div>Loading...</div>
@@ -17,7 +13,7 @@ export const RestaurantTabsContainer: FC<Props> =  (props) => {
 
 	return (
 		<div>
-				<RestaurantTabs {...props} restaurants={restaurants} />
+				<RestaurantTabs restaurants={restaurants} />
 		</div>
 	);
 };

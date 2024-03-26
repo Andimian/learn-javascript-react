@@ -17,6 +17,7 @@ export const Cart: FC<props> = ({productIds}) => {
 						return (
 							<DishContainer
 								key={dishId}
+								isClickable={true}
 								restaurantId={restaurantIdWithDishes[0]}
 								dishId={dishId}
 							/>

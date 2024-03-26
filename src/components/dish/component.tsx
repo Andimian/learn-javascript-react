@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { FC } from 'react';
 import { Counter } from '../counter/component.tsx';
 import { TDish } from '../../types.tsx';
+import { Link } from 'react-router-dom';
 
 export type DishType = {
 	id: string;
@@ -15,18 +16,29 @@ type Props = {
 	dish: TDish,
 	setAmount?:  (amount: number) => void,
 	amount?: number,
+	isClickable: boolean,
 }
 
-export const Dish: FC<Props> = ({dish, amount,  setAmount}) => {
+export const Dish: FC<Props> = (
+	{dish, isClickable, amount,  setAmount}
+) => {
 	if (!dish) {
 		return null;
 	}
 
 	return (
 		<div className={classNames(styles.dish)}>
-			<div className={classNames(styles.name)}>
-				{dish.name}
-			</div>
+			{isClickable ? (
+				<Link to={`/dish/${dish.id}`}>
+					{dish.name}
+				</Link>
+					) : (
+				<div className={classNames(styles.name)}>
+					{dish.name}
+				</div>
+			)
+			}
+
 			{amount != null && setAmount && (
 				<Counter
 					value={amount}

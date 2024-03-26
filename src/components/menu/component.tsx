@@ -13,7 +13,7 @@ export const Menu = ({dishes, restaurantId}: MenuProps ) => {
 			{dishes.map((dish	) => (
 				/* Тут передаем id, а не сущность потому что корзина нормально работает только с
 				* redux Toolkit (соответственно там нужны id) */
-				<li key={dish.id}><DishContainer dishId={dish.id}  restaurantId={restaurantId} /></li>
+				<li key={dish.id}><DishContainer dishId={dish.id} isClickable={true} restaurantId={restaurantId} /></li>
 			))}
 		</ul>
 	)

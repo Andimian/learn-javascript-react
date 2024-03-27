@@ -1,9 +1,6 @@
 .header {
-  background-color: #030000;
-  display: grid;
-  grid-template-columns: auto 200px;
-  grid-template-rows: 1fr;
-
+  background-color: rgba(0, 0, 0, 0.84);
+  overflow: hidden;
   h1 {
     display: flex;
     align-items: center;
@@ -14,4 +11,11 @@
     color: #eea316;
     font-family: "Fira Code", sans-serif;
   }
+}
+.container {
+   padding: 0 30px;
+   display: grid;
+   grid-template-columns: 100px auto 300px;
+   grid-template-rows: 1fr;
+   height: 100%;
 }

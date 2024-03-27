@@ -46,11 +46,12 @@ const reducer = (state: State, { type, payload }: Action): State => {
 }
 
 export const AuthForm = ({closeModal, className}: Prop ) => {
-    const {setUser} = useContext(UserAuthContext);
+    const {user, setUser} = useContext(UserAuthContext);
     const [form, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     return (
         <div className={styles.authModal}>
+            <div>{user?.name}</div>
             <div className={className}>
                 <label htmlFor="name">Имя</label>
                 <input
@@ -76,8 +77,13 @@ export const AuthForm = ({closeModal, className}: Prop ) => {
             <Button title={"Войти"}
                     onClick={() => {
                         if (form.name.length > 0) {
-                        setUser({name: form.name, email: form.email});
-                        closeModal();
+                            /* Тут ситуэйшн следующий: проект учебный, ручку на создание юзера не дали и поэтому мы
+                            * харкодим id из того, что есть. С этим id в базе пользователь Diana. Будем делать так, что
+                            * пользователь при входе в систему уже авторизован и это Diana */
+                            // setUser({name: form.name, email: form.email, id: uuidv4()});
+                            setUser({name: form.name, email: form.email, id: '20bed9b5-9c7b-4771-8221-75b74ed1904a'});
+
+                            closeModal();
                         }
                     }}
                     disabled={form.name.length === 0}

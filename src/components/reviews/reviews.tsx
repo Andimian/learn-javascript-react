@@ -1,17 +1,20 @@
-import { Review } from '../review/component.tsx';
 import styles from './style.module.scss';
 import classNames from 'classnames';
-
+import { ReviewContainer } from '../review/container.tsx';
+import { FC } from 'react';
+import { TReview } from '../../redux/entities/review/thunks/get-reviews.ts';
 
 export type ReviewsProps = {
-    reviews: string[],
+    reviews: TReview[],
 };
 
-export const Reviews = ({reviews}: ReviewsProps) => {
+export const Reviews: FC<ReviewsProps> = ({reviews}) => {
     return (
         <ul className={classNames(styles.root)}>
-            {reviews && reviews.map((reviewId) => (
-                <li key={reviewId}><Review reviewId={reviewId}/></li>
+            {reviews.map((review) => (
+                <li key={review.id}>
+                    <ReviewContainer review={review}/>
+                </li>
             ))}
         </ul>
     );

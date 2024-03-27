@@ -1,18 +1,19 @@
-import { RestaurantTabs } from '../../restaurants-tabs/component.tsx';
 import { useState } from 'react';
-import { Restaurant } from '../../restaurants/restaurant.tsx';
-import { useSelector } from 'react-redux';
-import { selectorRestaurantIds } from '../../../redux/entities/restaurant/selectors.tsx';
+import { RestaurantTabsContainer } from '../../restaurant-tabs/container.tsx';
+import { RestaurantContainer } from '../../restaurant/container.tsx';
 
 export const RestaurantPage = () => {
-	const restaurantsIds = useSelector(selectorRestaurantIds);
-	const [activeRestaurantId, setActiveRestaurantId] = useState<string>(restaurantsIds[0]);
-	const activeId: string | undefined = restaurantsIds.find((id: string) => (id === activeRestaurantId)!);
+	const [activeRestaurantId, setActiveRestaurantId] = useState<string | null>(null);
 
 	return (
 		<div>
-			<RestaurantTabs onSelect={setActiveRestaurantId}/>
-			{activeId && <Restaurant id={activeId} />}
+			<RestaurantTabsContainer onSelect={setActiveRestaurantId}/>
+
+			{activeRestaurantId ? (
+				<RestaurantContainer restaurantId={activeRestaurantId} />
+			) : (
+				'No active restaurant'
+			)}
 		</div>
 	);
 };

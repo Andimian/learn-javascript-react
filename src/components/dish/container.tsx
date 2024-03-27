@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FC, useCallback, } from 'react';
 import {  RootState } from '../../redux';
-import { selectDishAmountById, selectState, setAmount } from '../../redux/ui/cart';
+import { selectDishAmountById, setAmount } from '../../redux/ui/cart';
 import { Dish } from './component.tsx';
 import { useGetDishesByRestaurantIdQuery } from '../../redux/services/api.ts';
 
@@ -20,6 +20,9 @@ export type DishType = {
 export const DishContainer: FC<Props> = ({restaurantId, dishId, isClickable}) => {
 	// const amount = useSelector((state: RootState) => selectDishAmountById(state, restaurantId, dishId));
 	const amount = useSelector((state: RootState) => selectDishAmountById(state, dishId));
+
+	/* Старая реализация. Суть в том, что в RTK query грузит "пачками" и вот тут мы загружали по ресторанам,
+	* то якобы вот всего блюд может быть мега дохрена, а в одном рестсоране терпимо. Но  */
 	const { data: dish } = useGetDishesByRestaurantIdQuery(restaurantId, {
 		selectFromResult: (result) => ({
 			...result,
@@ -27,14 +30,12 @@ export const DishContainer: FC<Props> = ({restaurantId, dishId, isClickable}) =>
 		}),
 	});
 
-	const state = useSelector((state: RootState) => selectState(state) )
-
 	const dispatch = useDispatch();
 
 	const handleSetAmount = useCallback(
 		(amount: number) =>{
 			// dispatch(setAmount({ dishId: dishId, amount, restaurantId }))
-			dispatch(setAmount({ dishId: dishId, amount, }))
+			dispatch(setAmount({ dishId: dishId, amount }))
 		// }, [dishId, dispatch, restaurantId]
 		}, [dishId, dispatch]
 	);
@@ -44,7 +45,6 @@ export const DishContainer: FC<Props> = ({restaurantId, dishId, isClickable}) =>
 	return (
 		<>
 			<Dish dish={dish} amount={amount} isClickable={isClickable} setAmount={handleSetAmount}/>
-			{state.dishId}
 		</>
 	);
 };

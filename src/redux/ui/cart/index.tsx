@@ -31,9 +31,8 @@ export const cartSlice = createSlice({
 			// const { restaurantId, dishId, amount } = action.payload;
 			const { dishId, amount } = action.payload;
 			if (!state.dishId) {
-				state.dishId = amount;
+				state[dishId] = amount;
 			}
-			console.log('setAm');
 			// state[restaurantId][dishId] = amount;
 			// if (state[restaurantId][dishId] <= 0) {
 			if (state.dishId <= 0) {
@@ -51,13 +50,13 @@ export const cartSlice = createSlice({
 		selectDishAmountById: (
 			state,
 			// restaurantId: string,
-			productId: string
+			dishId: string
 		) => {
 			// return state[restaurantId] && state[restaurantId][productId]
 			// 	? state[restaurantId][productId]
 			// 	: 0;
-			return state[productId]
-				? state[productId]
+			return state[dishId]
+				? state[dishId]
 				: 0;
 		},
 
